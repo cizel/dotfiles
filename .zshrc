@@ -4,9 +4,7 @@ export GOPATH=$HOME/local/go/mypkg
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/shizhen/.oh-my-zsh
 
-export HOMEBREW_GITHUB_API_TOKEN="cbc1683ba739cebd5abbdde99a124a33cdc90733"
-
- #Set name of the theme to load. Optionally, if you set this to "random"
+#Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="cloud"
