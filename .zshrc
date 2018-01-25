@@ -1,14 +1,15 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$HOME/.composer/vendor/bin:$PATH
-export GOPATH=$HOME/local/go/mypkg
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$HOME/.composer/vendor/bin:$HOME/work/gopath/src/soa_tools:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/shizhen/.oh-my-zsh
+export JAVA_HOME=`/usr/libexec/java_home`
+export GOPATH=/Users/shizhen/work/gopath
+export NO_AUTH_BOTO_CONFIG=$HOME/.boto
 
-#Set name of the theme to load. Optionally, if you set this to "random"
+ #Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="cloud"
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -49,7 +50,7 @@ ZSH_THEME="cloud"
 
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx autojump zsh-autosuggestions ssh-agent composer tig)
+plugins=(git z zsh-autosuggestions ssh-agent tig brew tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -74,8 +75,8 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 #ssh-agent
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities github_rsa cizel-GitHub id_rsa 
+#zstyle :omz:plugins:ssh-agent agent-forwarding on
+#zstyle :omz:plugins:ssh-agent identities github_rsa cizel-GitHub id_rsa 
 
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -84,14 +85,15 @@ zstyle :omz:plugins:ssh-agent identities github_rsa cizel-GitHub id_rsa
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias ss='proxychains4'
+alias ss='export ALL_PROXY=http://127.0.0.1:8118'
+alias uss='unset ALL_PROXY'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias xmbash='docker exec -it website bash'
 alias cibash='docker exec -it php-ci bash'
-#autojump
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 #添加ssh-key
-ssh-add -K ~/.ssh/github_rsa
+alias github='ssh-add -K ~/.ssh/github_rsa'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# source $(brew --prefix php-version)/php-version.sh && php-version 5
+
+/usr/local/etc/profile.d/z.sh

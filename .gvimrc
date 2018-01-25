@@ -4,6 +4,7 @@ set nocompatible
 so ~/.vim/plugins.vim
 
 syntax enable
+syntax on
 set encoding=utf-8
 set backspace=indent,eol,start
 let mapleader = ','
@@ -26,6 +27,7 @@ set clipboard=unnamed "mac下的剪切板
 set t_CO=256
 set background=dark
 colorscheme hybrid_material
+"colors dracula 
 
 set guifont=Fira\ Code:h17
 set macligatures
@@ -136,7 +138,7 @@ map <Right> <nop>
 
 "tagBar
 "nmap <D-9> :TagbarToggle<CR>
-nmap <D-0> :TagbarOpenAutoClose<CR>
+nmap <Leader>t :TagbarOpenAutoClose<CR>
 
 "paste form system
 vmap <Leader>y "+y
@@ -155,6 +157,10 @@ map <C-ScrollWheelLeft> <nop>
 map <ScrollWheelRight> <nop> 
 map <S-ScrollWheelRigt> <nop> 
 map <C-ScrollWheelRigt> <nop> 
+
+"jsonFormat
+map <Leader>jf <Esc>:%!python -m json.tool<CR>
+
 "------------Plugins------------"
 
 "
@@ -185,18 +191,11 @@ let g:ctrlp_mruf_relative = 1
 "/
 let NERDTreeHijackNetrw = 0
 
-
-"/
-"/ Ag
-"/
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-
 "/
 "/ grepacmsanders/snipmate.vime
 "/
 set grepprg=ag
-
+let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "/
@@ -270,4 +269,3 @@ autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 if has("gui_macvim")
     macmenu &File.Print key=<nop>
 endif
-
