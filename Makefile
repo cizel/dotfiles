@@ -1,3 +1,6 @@
 init:
-	ln -fs `pwd`/.tmux/.tmux.conf ~/.tmux.conf
-	ln -fs `pwd`/.tmux.conf.local ~/.tmux.conf.local
+	brew install stow
+	stow emacs
+	stow vim
+	stow tmux
+	ln -sf `pwd`/tmux/.tmux/.tumx.conf ~/.tmux.conf
