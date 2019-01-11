@@ -5,6 +5,9 @@
 .vim/.netrwhist
 .vim/plugged/*
 
+# emacs
+spacemacs.env
+
 # git credential file
 .gitconfig.local
 
