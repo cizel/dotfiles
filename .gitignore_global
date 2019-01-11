@@ -1,0 +1,11 @@
+*~
+.DS_Store
+.php_cs.cache
+tags
+TestCommand.php
+.editorconfig
+GPATH
+GRTAGS
+GTAGS
+.projectile
+.#*

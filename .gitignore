@@ -1,12 +1,8 @@
 # working files
 .vim/viminfo
-.vim/swaps/*
 .vim/undo
 .vim/.netrwhist
 .vim/plugged/*
-
-# emacs
-spacemacs.env
 
 # git credential file
 .gitconfig.local
@@ -31,3 +27,15 @@ Thumbs.db
 
 # zsh
 .zshrc.local
+
+# emacs
+spacemacs.env
+tags
+GPATH
+GRTAGS
+GTAGS
+.projectile
+.#*
+
+# php
+.php_cs.cache
