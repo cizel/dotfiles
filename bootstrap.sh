@@ -149,6 +149,15 @@ FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim .spacemacs.d" # add in vim and the bina
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+init() {
+	git submodule update --init
+
+	local DOTFILES_PATH=~/.dotfiles
+
+	# update .tmux.conf
+	ln -f $DOTFILES_PATH/.tmux/.tmux.conf $DOTFILES_PATH
+}
+
 main() {
 
     local i=""
@@ -182,4 +191,5 @@ main() {
 
 }
 
+init
 main

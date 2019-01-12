@@ -8,11 +8,12 @@
 
 ## Setup
 
+Run this:
+
 ```bash
 git clone https://github.com/cizel/dotfiles ~/.dotfiles
 cd ~/.dotfiles
-chmod +x bootstrap.sh
-sh bootstrap.sh
+./bootstrap.sh
 ```
 
 ## Overview of Files
