@@ -1,0 +1,8 @@
+# aliases
+alias ss='export ALL_PROXY=http://127.0.0.1:8118'
+alias uss='unset ALL_PROXY'
+
+alias xmbash='docker exec -it website bash'
+alias xm71bash='docker exec -it website71 bash'
+alias cbash='docker exec -it centos zsh'
+
