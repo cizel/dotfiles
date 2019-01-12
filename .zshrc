@@ -1,4 +1,3 @@
-# Path to your oh-my-zsh installation.
 export ANTIGEN_PATH=~/.dotfiles
 source $ANTIGEN_PATH/antigen/antigen.zsh
 
@@ -10,16 +9,13 @@ antigen bundle git
 antigen bundle z
 antigen bundle tig
 antigen bundle brew
-antigen bundle brew-cask
 antigen bundle tmux
 antigen bundle docker
-antigen bundle extract
-antigen bundle command-not-found
+#antigen bundle extract
 
 # extra bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
 
 # Load the theme.
 antigen theme cloud
@@ -33,8 +29,8 @@ antigen apply
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
+# exports
 [[ -f ~/.exports ]] && source ~/.exports
 
 # z autojump
-/usr/local/etc/profile.d/z.sh
-
+# /usr/local/etc/profile.d/z.sh
