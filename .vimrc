@@ -1,4 +1,5 @@
-source ~/.vimrc_plugins
+" load plugins
+source ~/.vim/plugins.vim
 
 set encoding=utf-8
 set backspace=indent,eol,start
@@ -31,7 +32,6 @@ set background=dark
 " colorscheme hybrid_material
 
 set guifont=Fira\ Code:h18
-"set macligatures
 
 set guioptions-=l
 set guioptions-=L
@@ -69,13 +69,12 @@ nmap <silent> <leader>feR :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'v
 
 nmap <Leader>fed :tabedit ~/.vimrc<cr>
 nmap <Leader>fes :e  ~/.vim/snippets/
-nmap <Leader>fep :tabedit ~/.vimrc_plugins<cr>
+nmap <Leader>fep :tabedit ~/.vim/plugins.vim<cr>
 
 nmap <Leader>sc :nohlsearch<cr>
 
 " NERDTree
 nmap <Leader>pt :NERDTreeToggle<cr>
-"
 
 nmap <D-[> <C-t>
 nmap gd g<C-]>
