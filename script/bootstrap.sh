@@ -15,7 +15,6 @@
 # jump down to line ~140 for the start.
 
 
-
 #
 # utils !!!
 #
@@ -143,7 +142,9 @@ print_success() {
 
 
 # finds all .dotfiles in this folder
-declare -a FILES_TO_SYMLINK=$(find . -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .osx | sed -e 's|//|/|' | sed -e 's|./.|.|')
+declare DOTFILES_PATH=$HOME/.dotfiles
+
+declare -a FILES_TO_SYMLINK=$(find $DOTFILES_PATH -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .osx | sed -e 's|'$DOTFILES_PATH'/||' | sed -e 's|//|/|' | sed -e 's|\./\.|.|')
 FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim .spacemacs.d" # add in vim and the binaries
 
 
@@ -151,8 +152,6 @@ FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim .spacemacs.d" # add in vim and the bina
 
 init() {
 	git submodule update --init
-
-	local DOTFILES_PATH=~/.dotfiles
 
 	# update .tmux.conf
 	ln -f $DOTFILES_PATH/.tmux/.tmux.conf $DOTFILES_PATH
@@ -166,7 +165,7 @@ main() {
 
     for i in ${FILES_TO_SYMLINK[@]}; do
 
-        sourceFile="$(pwd)/$i"
+        sourceFile="$DOTFILES_PATH/$i"
         targetFile="$HOME/$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
 
         if [ -e "$targetFile" ]; then

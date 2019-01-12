@@ -13,7 +13,7 @@ Run this:
 ```bash
 git clone https://github.com/cizel/dotfiles ~/.dotfiles
 cd ~/.dotfiles
-./bootstrap.sh
+script/bootstrap.sh
 ```
 
 ## Overview of Files
