@@ -1,8 +1,9 @@
 [core]
-	editor = /usr/bin/vim
-	filemode = false
-	excludesfile = ~/.gitignore
-	attributesfile = ~/.gitattributes
+    editor = /usr/bin/vim
+    filemode = false
+    excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
+
 # so much color
 [color]
     ui = auto
@@ -36,10 +37,10 @@
 
 # use separate file for username / github token / etc
 [include]
-  path = ~/.gitconfig.local
+    path = ~/.gitconfig.local
 
 [remote "origin"]
     fetch = +refs/heads/*:refs/remotes/origin/*
 
 [gpg]
-	program = gpg
+    program = gpg
