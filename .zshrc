@@ -1,11 +1,31 @@
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ANTIGEN_PATH=~/.dotfiles
+source $ANTIGEN_PATH/antigen/antigen.zsh
 
-ZSH_THEME="cloud"
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
-plugins=(git z zsh-autosuggestions tig brew tmux zsh-syntax-highlighting git-open docker extract yarn)
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle z
+antigen bundle tig
+antigen bundle brew
+antigen bundle brew-cask
+antigen bundle tmux
+antigen bundle docker
+antigen bundle extract
+antigen bundle command-not-found
 
-source $ZSH/oh-my-zsh.sh
+# extra bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+
+# Load the theme.
+antigen theme cloud
+
+# Tell Antigen that you're done.
+antigen apply
 
 # User configuration
 source ~/.zshrc.local
