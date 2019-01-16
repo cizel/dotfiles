@@ -298,4 +298,3 @@ bind C-h send-prefix
 # other setting
 setw -g automatic-rename off
 set-option -g allow-rename off
-
