@@ -1,54 +1,117 @@
 " load plugins
 source ~/.vim/plugins.vim
 
-set encoding=utf-8
-set backspace=indent,eol,start
+"--------------- basic setting ---------------"
 
+" diable old vi
+set nocompatible
+
+" show synatx highlight
+syntax on
+
+" show insert/command text
 set showmode
-set autoindent
-set complete=.,w,b,u
-set tabstop=4
-set shiftwidth=4
+
+" show leader key and typing words in normal mode
 set showcmd
-set softtabstop=4
-set expandtab
-set noswapfile
-set ignorecase  "ignore Number Case
-set nobackup
-set autowriteall   "automatically write the file when switch buffer
-set mousehide "hide mouse when typing
-"set mouse -=a
-set clipboard=unnamed "mac下的剪切板
-set wrap
-set textwidth=0
-set nofoldenable
-set nowrap
-set wrapmargin=2
+
+" do not use mouse
+set mouse -=a
+
+" set use utf-8 encoding
+set encoding=utf-8
+
+" enable 256 color
+set t_Co=256
+
+" auto load indent from ~/.vim/indent/*.vim
+filetype indent on
+
+"automatically write the file when switch buffer
+set autowriteall
+
+" enable paste
 set paste
 
-" View
-set t_Co=256
-set background=dark
-" colorscheme hybrid_material
+"mac paste
+set clipboard=unnamed
 
-set guifont=Fira\ Code:h18
+" no swap file
+"set noswapfile
+set directory=~/.vim/swap/
 
-set guioptions-=l
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
-set guioptions-=e "tab
+" no backup file
+"set nobackup
+set backupdir=~/.vim/backup/
 
-set number
-set relativenumber
-set linespace=15 "macvim line-height
+" no undofile
+"set undofile
+set undodir=~/.vim/undo/
+
+" set no bell
 set noerrorbells visualbell t_vb=
 
-"----------------Search-------------"
+set history=1000
+
+" backsapce behavior
+set backspace=indent,eol,start
+
+"set complete=.,w,b,u
+
+"--------------- indent ----------------"
+
+" next line auto indent
+set autoindent
+
+" tab to space width
+set tabstop=4
+
+" press `<<` or `>>` indent width
+set shiftwidth=4
+
+" set Tab auto change to space
+set expandtab
+
+" set Tab change to space width
+set softtabstop=4
+
+
+"--------------- appearance ---------------"
+
+" show relative line number
+set relativenumber
+
+" highlight current line
+"set cursorline
+
+" set line width
+set textwidth=80
+
+" auto wrap the line
+set wrap
+set linebreak
+set wrapmargin=2
+
+"hide mouse when typing
+set mousehide
+
+set background=dark
+
+"set nofoldenable
+
+color desert
+
+highlight CursorLine term=bold
+
+"--------------- search ---------------"
+
+set showmatch
 set hlsearch
 set incsearch
+set ignorecase
+set smartcase
 
-"----------------Mappings-------------"
+"----------------  Mappings ---------------"
 "n  Normal mode map. Defined using ':nmap' or ':nnoremap'.
 "i  Insert mode map. Defined using ':imap' or ':inoremap'.
 "v  Visual and select mode map. Defined using ':vmap' or ':vnoremap'.
@@ -85,15 +148,15 @@ nmap <Leader>sj :CtrlPBufTag<cr>
 nmap <Leader>pr :CtrlPMRUFiles<cr>
 nmap <Leader>fr :CtrlPMRUFiles<cr>
 
+" fzf
+nmap <Leader>bb :Buffer<cr>
+
+
 "ag
 nmap <Leader>/ :Ag<space>
 
 "tagBar
 nmap <Leader>t :TagbarOpenAutoClose<CR>
-
-"paste form system
-"vmap <Leader>y "+y
-"vmap <Leader>p "+p
 
 "disable key
 map <Up> <nop>
@@ -161,9 +224,20 @@ let g:rooter_patterns = ['.git/']
 set noimd
 
 if has("gui_running")
-	" GUI is running or is about to start.
-	" Maximize gvim window (for an alternative on Windows, see simalt below).
-	set lines=999 columns=999
+    " GUI is running or is about to start.
+    " Maximize gvim window (for an alternative on Windows, see simalt below).
+    set lines=999 columns=999
+    "diabled colorscheme hybrid_material
+
+    set guifont=Fira\ Code:h18
+
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=e "tab
+
+    set linespace=15 "macvim line-height
 endif
 
 "Note and Tips

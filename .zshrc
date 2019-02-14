@@ -11,6 +11,7 @@ antigen bundle tig
 antigen bundle brew
 antigen bundle tmux
 antigen bundle docker
+antigen bundle fzf
 #antigen bundle extract
 
 # extra bundle.
@@ -19,6 +20,8 @@ antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
 antigen theme cloud
+# antigen bundle mafredri/zsh-async
+# antigen bundle sindresorhus/pure
 
 # Tell Antigen that you're done.
 antigen apply

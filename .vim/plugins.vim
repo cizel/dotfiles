@@ -46,7 +46,12 @@ Plug 'szw/vim-tags'
 "Plug 'airblade/vim-rooter'
 "Plug 'vim-airline/vim-airline'
 Plug 'mbbill/undotree'
-Plug 'ntpeters/vim-better-whitespace'
+"Plug 'ntpeters/vim-better-whitespace'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tell-k/vim-autopep8'
 
 "
 " All of your Plugs must be added before the following line

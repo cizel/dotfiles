@@ -6,11 +6,17 @@ export MANPAGER="less -X"
 
 # Prefer US English and use UTF-8
 export LC_ALL="en_US.UTF-8"
-export LANG="en_US"
+export LANG="en_US.UTF-8"
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export GPG_TTY=$(tty);
+
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+export PURE_GIT_UNTRACKED_DIRTY=0
+export PURE_GIT_DOWN_ARROW=⇣
+export PURE_GIT_UP_ARROW=⇡
 
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
