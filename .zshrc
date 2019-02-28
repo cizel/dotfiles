@@ -11,7 +11,7 @@ antigen bundle tig
 antigen bundle brew
 antigen bundle tmux
 antigen bundle docker
-antigen bundle fzf
+#antigen bundle fzf
 #antigen bundle extract
 
 # extra bundle.

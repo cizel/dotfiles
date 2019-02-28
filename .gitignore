@@ -1,8 +1,8 @@
 # working files
 .vim/viminfo
-.vim/.undo
-.vim/.backup
-.vim/.swp
+.vim/undo
+.vim/backup
+.vim/swap
 .vim/.netrwhist
 .vim/plugged/*
 
@@ -43,3 +43,4 @@ GTAGS
 .php_cs.cache
 
 .editorconfig
+grumphp.yml

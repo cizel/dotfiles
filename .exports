@@ -26,7 +26,9 @@ export PATH=$HOME/work/gopath/src/soa_tools:$PATH
 export PATH=$HOME/private/bin:$PATH
 
 # JAVA PATH
-export JAVA_HOME=`/usr/libexec/java_home`
+if [ -x "/usr/libexec/java_home" ]; then
+    export JAVA_HOME=`/usr/libexec/java_home`
+fi
 
 # GO Path
 export GOPATH=~/work/gopath
