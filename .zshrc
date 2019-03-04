@@ -19,7 +19,11 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
-antigen theme cloud
+if [ "$(uname)" = 'Darwin' ]; then
+    antigen theme cloud
+else
+    antigen theme robbyrussell
+fi
 # antigen bundle mafredri/zsh-async
 # antigen bundle sindresorhus/pure
 
@@ -34,6 +38,3 @@ antigen apply
 
 # exports
 [[ -f ~/.exports ]] && source ~/.exports
-
-# z autojump
-# /usr/local/etc/profile.d/z.sh
