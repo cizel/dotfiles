@@ -80,6 +80,7 @@ set softtabstop=4
 
 " show relative line number
 set relativenumber
+set number
 
 " highlight current line
 "set cursorline
