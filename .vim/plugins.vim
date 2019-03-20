@@ -38,7 +38,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'padde/jump.vim'
 Plug 'godlygeek/tabular' "Vim script for text filtering and alignment
-Plug 'plasticboy/vim-markdown'
+"Plug 'plasticboy/vim-markdown'
 Plug 'hotoo/pangu.vim'
 Plug 'szw/vim-tags'
 "Plug 'tmux-plugins/vim-tmux-focus-events'

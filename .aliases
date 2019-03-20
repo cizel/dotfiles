@@ -6,3 +6,7 @@ alias xmbash='docker exec -it website bash'
 alias xm71bash='docker exec -it website71 bash'
 alias cbash='docker exec -it centos zsh'
 
+# common
+
+alias ip="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+

@@ -220,6 +220,9 @@ let g:EditorConfig_max_line_indicator = "line"
 " vim root
 let g:rooter_patterns = ['.git/']
 
+" vim go
+let g:go_version_warning = 0
+
 " macvim 在命令模式中，输入法自动会被禁用
 set noimd
 

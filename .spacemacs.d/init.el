@@ -67,6 +67,7 @@ values."
      html
      (javascript :variables javascript-backend 'nil)
      (go :variables go-tab-width 4)
+     (java :variables java-backend 'lsp)
 
      ;;org setting
      (org :variables
