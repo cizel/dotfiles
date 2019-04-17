@@ -18,6 +18,8 @@ export PURE_GIT_UNTRACKED_DIRTY=0
 export PURE_GIT_DOWN_ARROW=⇣
 export PURE_GIT_UP_ARROW=⇡
 
+export GO111MODULE=auto
+
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/work/gopath/bin:$PATH
