@@ -1,8 +1,5 @@
 # aliases
 
-alias vi="nvim"
-alias vim="nvim"
-
 alias ss='export ALL_PROXY=http://127.0.0.1:8118'
 alias uss='unset ALL_PROXY'
 
