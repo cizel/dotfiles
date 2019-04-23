@@ -21,7 +21,9 @@ antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
 if [ "$(uname)" = 'Darwin' ]; then
-    antigen theme cloud
+    #antigen theme cloud
+    antigen bundle mafredri/zsh-async
+    antigen bundle sindresorhus/pure
 else
     antigen theme robbyrussell
 fi
