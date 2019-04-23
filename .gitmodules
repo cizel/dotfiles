@@ -7,3 +7,6 @@
 [submodule ".emacs.d"]
 	path = .emacs.d
 	url = https://github.com/syl20bnr/spacemacs.git
+[submodule ".spacemacs.d"]
+	path = .spacemacs.d
+	url = https://github.com/cizel/spacemacs.d
