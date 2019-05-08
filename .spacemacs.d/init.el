@@ -39,7 +39,7 @@ values."
      search-engine
      (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
           osx-command-as 'super)
-     (spell-checking :variables spell-checking-enable-by-default nil)
+     ;;(spell-checking :variables spell-checking-enable-by-default nil)
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
      (spacemacs-layouts :variables layouts-enable-autosave nil
@@ -51,13 +51,12 @@ values."
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil)
-     (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     ;;(ibuffer :variables ibuffer-group-buffers-by 'projects)
      (auto-completion :packages auto-complete ac-ispell company company-statistics fuzzy
                       :variables auto-completion-enable-sort-by-usage t
                       :disabled-for org markdown)
      (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
      (shell :variables shell-default-shell 'eshell)
-     deft
      (markdown :variables markdown-live-preview-engine 'vmd)
      yaml
      react
@@ -84,7 +83,7 @@ values."
               chinese-enable-youdao-dict t)
 
      ;;custom layer
-     cizel
+     ;;cizel
 
      )
    ;; List of additional packages that will be installed without being
@@ -93,9 +92,9 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     all-the-icons
      sicp
      helm-ag
+     meghanada
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -476,6 +475,25 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (setq js2-strict-missing-semi-warning nil)
   (setq js2-missing-semi-one-line-override nil)
+
+  (require 'meghanada)
+  (add-hook 'java-mode-hook
+            (lambda ()
+              ;; meghanada-mode on
+              (meghanada-mode t)
+              (flycheck-mode +1)
+              (setq c-basic-offset 2)
+              ;; use code format
+              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+  (cond
+   ((eq system-type 'windows-nt)
+    (setq meghanada-java-path (expand-file-name "bin/java" (getenv "JAVA_HOME")))
+    (setq meghanada-maven-path "mvn.cmd"))
+   (t
+    (setq meghanada-java-path "java")
+    (setq meghanada-maven-path "mvn")))
+
+  (setq neo-smart-open t)
   )
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
