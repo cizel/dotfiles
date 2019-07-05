@@ -40,3 +40,5 @@ GTAGS
 
 .editorconfig
 grumphp.yml
+
+.spacemacs.env

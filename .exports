@@ -10,30 +10,34 @@ export LANG="en_US.UTF-8"
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+# GPG
 export GPG_TTY=$(tty);
-
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export PURE_GIT_UNTRACKED_DIRTY=0
 export PURE_GIT_DOWN_ARROW=⇣
 export PURE_GIT_UP_ARROW=⇡
 
-export GO111MODULE=auto
-
 # PATH
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=$HOME/work/go-code/bin:$PATH
-export PATH=$HOME/.composer/vendor/bin:$PATH
-export PATH=$HOME/work/go-code/src/soa_tools:$PATH
-export PATH=$HOME/private/bin:$PATH
-export PATH=/usr/local/opt/php@7.2/bin:$PATH
-export PATH=/usr/local/opt/php@7.2/sbin:$PATH
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/work/go-code/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH="$HOME/work/go-code/src/soa_tools:$PATH"
+export PATH="$HOME/private/bin:$PATH"
+
+## PATH - php 7.2
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+
+# MANPATH
+export MANPATH="/usr/local/man:$MANPATH"
 
 # JAVA PATH
 if [ -x "/usr/libexec/java_home" ]; then
-    export JAVA_HOME=`/usr/libexec/java_home`
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 fi
 
 # GO Path
-export GOPATH=~/work/go-code
-export GOBIN=~/work/go-code/bin
+export GOPATH=$HOME/work/go-code
+export GOBIN=$HOME/work/go-code/bin
+
+export GO111MODULE=on
