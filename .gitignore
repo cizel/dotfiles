@@ -28,6 +28,7 @@ Thumbs.db
 
 # emacs
 spacemacs.env
+.spacemacs.env
 tags
 GPATH
 GRTAGS
@@ -41,4 +42,11 @@ GTAGS
 .editorconfig
 grumphp.yml
 
-.spacemacs.env
+# code
+.vscode
+
+#code java
+.project
+.settings
+.classpath
+.factorypath
