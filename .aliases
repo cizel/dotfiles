@@ -8,6 +8,7 @@ alias xm71bash='docker exec -it website71 bash'
 alias cbash='docker exec -it centos zsh'
 
 alias more="less"
+alias vim="vi"
 
 # common
 

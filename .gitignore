@@ -1,6 +1,6 @@
 # working files
-.vim/viminfo
-.vim/.netrwhist
+viminfo
+.netrwhist
 
 # git credential file
 .gitconfig.local

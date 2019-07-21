@@ -300,4 +300,7 @@ bind C-h send-prefix
 setw -g automatic-rename off
 set-option -g allow-rename off
 
+#color
+set -g default-terminal screen-256color
+set-option -ga terminal-overrides ",*256col*:Tc" # 这句是关键
 
