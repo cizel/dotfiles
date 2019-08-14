@@ -8,11 +8,13 @@ alias xm71bash='docker exec -it website71 bash'
 alias cbash='docker exec -it centos zsh'
 
 alias more="less"
-alias vim="vi"
+
+alias vi="nvim"
+alias vim="nvim"
 
 # common
 
-alias ip="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+alias ips="ifconfig | grep -E '\d+\.\d+\.\d+\.\d+ netmask' | awk '{print $2}' | sed -n '2p'"
 
 alias qemu="qemu-system-x86_64"
 
