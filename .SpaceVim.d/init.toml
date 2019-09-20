@@ -28,15 +28,8 @@ enable_statusline_mode = false
 enable_neomake = false
 enable_ale = false
 #filemanager = "defx"
-#filetree_direction = "left"
 bootstrap_before = "myspacevim#before"
 #bootstrap_after  = "myspacevim#after"
-disabled_plugins = ["denite.nvim"]
-
-[[custom_plugins]]
-name = "SpaceVim/denite.nvim"
-merged = false
-loadconf = true
 
 [[custom_plugins]]
 name = "CodeFalling/fcitx-vim-osx"
@@ -54,8 +47,10 @@ name = 'shell'
 default_position = 'top'
 default_height = 30
 
+#[[layers]]
+#name = "denite"
 [[layers]]
-name = "denite"
+name = "ctrlp"
 
 [[layers]]
 name = "format"
