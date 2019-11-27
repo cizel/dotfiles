@@ -44,3 +44,5 @@
 
 [gpg]
     program = gpg
+[user]
+	team = sales-middle

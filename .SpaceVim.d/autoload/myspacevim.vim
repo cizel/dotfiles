@@ -1,6 +1,8 @@
 function! myspacevim#before() abort
   call SpaceVim#custom#SPC('nore', ['f', 'T'], 'Tagbar', 'show Tagbar', 1)
   call SpaceVim#custom#SPC('nore', ['p', 'T'], 'Tagbar', 'show Tagbar', 1)
+  call SpaceVim#custom#SPC('nore', ['p', 't'], 'NERDTreeFind', 'Find file location in tree', 1)
+  call SpaceVim#custom#SPC('nore', ['/'], 'Ag', 'Find file in path', 1)
   " macvim 在命令模式中，输入法自动会被禁用
   set noimd
   "mac paste
@@ -14,5 +16,10 @@ function! myspacevim#before() abort
   let g:ctrlp_match_window_reversed=0
   let g:ctrlp_follow_symlinks=1
   let g:ctrlp_mruf_relative = 0
+
+  " custom mapping
+  "nmap <Leader>/ :Ag<space>
+  nmap <D-[> <C-t>
+  nmap gd g<C-]>
   "let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
 endfunction

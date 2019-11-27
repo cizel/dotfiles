@@ -27,7 +27,9 @@ enable_tabline_filetype_icon = true
 enable_statusline_mode = false
 enable_neomake = false
 enable_ale = false
-#filemanager = "defx"
+filemanager = "defx"
+#filemanager = "nerdtree"
+#filetree_direction = "left"
 bootstrap_before = "myspacevim#before"
 #bootstrap_after  = "myspacevim#after"
 
@@ -43,23 +45,31 @@ loadconf = true
 #auto-completion-tab-key-behavior = "smart"
 
 [[layers]]
-name = 'shell'
-default_position = 'top'
-default_height = 30
-
-#[[layers]]
-#name = "denite"
-[[layers]]
 name = "ctrlp"
 
-[[layers]]
-name = "format"
+#[[layers]]
+#name = "format"
 
 [[layers]]
 name = "tools"
+
+[[layers]]
+name = "git"
+
+#[[layers]]
+#name = "checkers"
+#enable_neomake = false
+#show_cursor_error = false
+#lint_on_the_fly = false
 
 [[layers]]
 name = "lang#go"
 
 [[layers]]
 name = "lang#php"
+
+[[layers]]
+name = "lang#typescript"
+
+[[layers]]
+name = "lang#toml"
