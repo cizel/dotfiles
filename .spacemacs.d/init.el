@@ -197,6 +197,7 @@ values."
    dotspacemacs-themes '(;;material ;;org-mode 太难看
                          ;;gruvbox ;;这个还不错
                          spacemacs-dark
+                         ;;afternoon
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -387,9 +388,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (load custom-file 'no-error 'no-message)
 
   ;;custom style
-  (custom-set-variables '(spacemacs-theme-custom-colors
-                          '((comment-bg . "#292b2e")
-                            )))
+  ;;(custom-set-variables '(spacemacs-theme-custom-colors
+  ;;                        '((comment-bg . "#292b2e")
+  ;;                          )))
 
   ;;other
   (setq evil-shift-round nil)
