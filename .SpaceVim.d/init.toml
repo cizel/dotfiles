@@ -36,6 +36,10 @@ expand_tab = false
 name = "CodeFalling/fcitx-vim-osx"
 merged = false
 loadconf = true
+[[custom_plugins]]
+name = "rking/ag.vim"
+merged = false
+loadconf = true
 
 [[layers]]
 name = "ctrlp"
@@ -52,6 +56,7 @@ name = "git"
 [[layers]]
 name = "checkers"
 show_cursor_error = false
+enable = false
 
 [[layers]]
 name = "tmux"

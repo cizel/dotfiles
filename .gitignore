@@ -39,7 +39,6 @@ GTAGS
 # php
 .php_cs.cache
 
-.editorconfig
 grumphp.yml
 
 # code
