@@ -8,6 +8,9 @@ alias more="less"
 alias vi="nvim"
 alias vim="nvim"
 
+#alias vi="emacs"
+#alias vim="emacs"
+
 # common
 
 alias ips="ifconfig | grep -E '\d+\.\d+\.\d+\.\d+ netmask' | awk '{print $2}' | sed -n '2p'"

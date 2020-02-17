@@ -1,8 +1,8 @@
-;;; packages.el --- cizel layer packages file for Spacemacs.
+;;; packages.el --- cizel-layer layer packages file for Spacemacs.
 ;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
-;; Author: Cizel <cizelme@gmail.com>
+;; Author: 施臻 <shizhen@192.168.0.101>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -18,22 +18,20 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `cizel-packages'. Then, for each package PACKAGE:
+;; added to `cizel-layer-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `cizel/init-PACKAGE' to load and initialize the package.
+;;   function `cizel-layer/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `cizel/pre-init-PACKAGE' and/or
-;;   `cizel/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `cizel-layer/pre-init-PACKAGE' and/or
+;;   `cizel-layer/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst cizel-packages
-  '(
-  	;;cizel-misc
-  )
-  "The list of Lisp packages required by the cizel layer.
+(defconst cizel-layer-packages
+  '()
+  "The list of Lisp packages required by the cizel-layer layer.
 
 Each entry is either:
 
