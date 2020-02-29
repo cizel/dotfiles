@@ -5,8 +5,7 @@ alias uss='unset ALL_PROXY; unset HTTP_PROXY; unset HTTPS_PROXY'
 
 alias more="less"
 
-alias vi="nvim"
-alias vim="nvim"
+alias vi="vim"
 
 #alias vi="emacs"
 #alias vim="emacs"

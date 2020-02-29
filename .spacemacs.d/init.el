@@ -1,5 +1,4 @@
-;; -*- mode: emacs-lisp; lexical-binding: t -*-
-;; This file is loaded by Spacemacs at startup.
+;; -*- mode:
 ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
@@ -67,7 +66,10 @@ This function should only modify configuration layer settings."
              (org :variables org-enable-github-support t
                  org-enable-bootstrap-support t)
              (shell :variables shell-default-shell 'ansi-term
-                 shell-default-term-shell "/bin/zsh")
+                 shell-default-position 'bottom
+                 shell-default-height 30
+                 shell-protect-eshell-prompt nil
+                 close-window-with-terminal t)
              markdown
              yaml
              react
@@ -78,15 +80,14 @@ This function should only modify configuration layer settings."
              (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'typescript-formatter
-                 typescript-backend 'lsp)
+                 typescript-backend 'tide)
              emacs-lisp
              (go :variables go-tab-width 4)
              ;;(java :variables java-backend 'lsp)
 
              (php :packages php-mode company ggtags helm-gtags)
              (java :variables java-backend 'lsp)
-             (chinese :variables chinese-default-input-method 'pinyin
-                 chinese-enable-youdao-dict t)
+             (chinese :variables chinese-enable-fcitx t)
              )
 
         ;; List of additional packages that will be installed without being
@@ -101,7 +102,7 @@ This function should only modify configuration layer settings."
              sicp
              helm-ag
              editorconfig
-             lsp-ui
+             dap-mode
              protobuf-mode)
 
         ;; A list of packages that cannot be updated.
@@ -536,7 +537,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     ;; hack for remove purpose mode
     (setq purpose-mode nil)
 
-    ;;(setq lsp-java-server-install-dir  "~/.spacemacs.d/lsp-java/")
     (setq lsp-java-jdt-download-url "https://static.cizel.cn/jdt-language-server-latest.tar.gz")
     )
 
@@ -553,8 +553,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-    ;;(add-hook 'lsp-mode-hook #'lsp-lens-mode)
-    ;;(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
 
     ;; evil cursor configuration
     (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q"))) (add-hook 'evil-normal-state-entry-hook (lambda () (send-string-to-terminal "\033[0 q")))
@@ -565,7 +563,8 @@ before packages are loaded."
     ;; force horizontal split window
     ;;(setq split-width-threshold 120)
 
-    ;;(setq-default line-spacing 5)
+    (evil-set-initial-state 'term-mode 'emacs) ;; turn off evil-mode for ansi-term
+    (setq term-char-mode-point-at-process-mark nil) ;; allow editing in normal mode
 
     (global-hungry-delete-mode t)
 
@@ -593,26 +592,26 @@ before packages are loaded."
                     (replace-match "")))))
 
 
-    ;;(defun moon-override-yank-pop (&optional arg)
-    ;;    "Delete the region before inserting poped string."
-    ;;    (when (and evil-mode (eq 'visual evil-state))
-    ;;        (kill-region (region-beginning) (region-end))))
+    (defun moon-override-yank-pop (&optional arg)
+        "Delete the region before inserting poped string."
+        (when (and evil-mode (eq 'visual evil-state))
+            (kill-region (region-beginning) (region-end))))
 
-    ;;(advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
+    (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
 
     ;; boost find file and load saved persp layout  performance
     ;;(setq find-file-hook nil)
-    ;;(add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))
+    (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))
 
     ;; js-mode configuration
     (add-to-list 'auto-mode-alist '("views.*\\.php\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-    ;; proto-mode
-    (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
-
 
     (setq js2-strict-missing-semi-warning nil)
     (setq js2-missing-semi-one-line-override nil)
+
+    ;; proto-mode
+    (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
     ;; neotree configurations
     (setq neo-smart-open t)
@@ -623,19 +622,19 @@ before packages are loaded."
             "~/.m2/repository/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar"
             )
         )
-    (setq lsp-java-vmargs `(
-                               "-noverify"
-                               "-Xmx1G"
-                               "-XX:+UseG1GC"
-                               "-XX:+UseStringDeduplication"
-                               ,(concat "-javaagent:" lombok-jar-path)
-                               ,(concat "-Xbootclasspath/a:" lombok-jar-path)
-                               )
+    (setq lsp-java-vmargs
+        `(
+             "-noverify"
+             "-Xmx1G"
+             "-XX:+UseG1GC"
+             "-XX:+UseStringDeduplication"
+             ,(concat "-javaagent:" lombok-jar-path)
+             ,(concat "-Xbootclasspath/a:" lombok-jar-path)
+             )
         )
+    ;;(add-hook 'lsp-mode-hook #'lsp-lens-mode)
+    ;;(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
     )
-
-(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
-(load custom-file 'no-error 'no-message)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

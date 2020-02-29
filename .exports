@@ -41,6 +41,3 @@ export GOPATH=$HOME/work/go-code
 export GOBIN=$HOME/work/go-code/bin
 
 export GO111MODULE=on
-
-# homebrew mirror
-#export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles

@@ -1,7 +1,7 @@
 # cizel dotfiles 
 
 - vim
-- emacs (SpaceEmacs)
+- emacs (Spacemacs)
 - tmux (Oh My Tmux)
 - zsh (Oh My Zsh) 
 - git
