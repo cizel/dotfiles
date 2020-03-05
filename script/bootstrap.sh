@@ -145,7 +145,7 @@ print_success() {
 declare DOTFILES_PATH=$HOME/.dotfiles
 
 declare -a FILES_TO_SYMLINK=$(find $DOTFILES_PATH -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .osx | sed -e 's|'$DOTFILES_PATH'/||' | sed -e 's|//|/|' | sed -e 's|\./\.|.|')
-FILES_TO_SYMLINK="$FILES_TO_SYMLINK .SpaceVim.d .spacemacs.d" # add in vim and the binaries
+FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim .spacemacs.d" # add in vim and the binaries
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
