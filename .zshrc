@@ -12,8 +12,6 @@ antigen bundle brew
 antigen bundle tmux
 antigen bundle docker
 antigen bundle mvn
-#antigen bundle fzf
-#antigen bundle extract
 
 # extra bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -21,14 +19,11 @@ antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
 if [ "$(uname)" = 'Darwin' ]; then
-    #antigen theme cloud
     antigen bundle mafredri/zsh-async
     antigen bundle sindresorhus/pure
 else
     antigen theme robbyrussell
 fi
-# antigen bundle mafredri/zsh-async
-# antigen bundle sindresorhus/pure
 
 # Tell Antigen that you're done.
 antigen apply
