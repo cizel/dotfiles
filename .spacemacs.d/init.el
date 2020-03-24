@@ -42,7 +42,7 @@ This function should only modify configuration layer settings."
              better-defaults
              colors
              search-engine
-
+             spell-checking
              (syntax-checking :variables syntax-checking-enable-by-default nil
                  syntax-checking-enable-tooltips nil)
              (spacemacs-layouts :variables layouts-enable-autosave nil
@@ -632,8 +632,10 @@ before packages are loaded."
              ,(concat "-Xbootclasspath/a:" lombok-jar-path)
              )
         )
-    ;;(add-hook 'lsp-mode-hook #'lsp-lens-mode)
-    ;;(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+
+    (require 'dap-java)
+    (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+    (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
     )
 
 ;; Do not write anything past this comment. This is where Emacs will
