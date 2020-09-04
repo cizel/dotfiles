@@ -1,14 +1,10 @@
 # aliases
-
-alias ss='export HTTP_PROXY=http://127.0.0.1:7890 HTTP_PROXYS=http://127.0.0.1:7890 ALL_PROXY=http://127.0.0.1:7890'
-alias uss='unset ALL_PROXY; unset HTTP_PROXY; unset HTTPS_PROXY'
+alias ss='export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;'
+alias uss='unset http_proxy; unset https_proxy'
 
 alias more="less"
 
 alias vi="vim"
-
-#alias vi="emacs"
-#alias vim="emacs"
 
 # common
 

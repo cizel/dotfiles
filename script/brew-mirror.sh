@@ -9,7 +9,7 @@ mirror_disable () {
   git remote set-url origin https://github.com/Homebrew/homebrew-core
 
   # Homebrew Cask
-  cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
+  cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
   git remote set-url origin https://github.com/Homebrew/homebrew-cask
 
   # Homebrew Bottles
@@ -26,7 +26,7 @@ mirror_enable () {
   git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
 
   # Homebrew Cask
-  cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
+  cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
   git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
 
   # Homebrew Bottles

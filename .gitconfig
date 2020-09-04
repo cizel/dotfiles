@@ -45,4 +45,8 @@
 [gpg]
     program = gpg
 [user]
-	team = sales-middle
+	team = devolop-3-x
+	name = shizhen
+	email = shizhen@xiaomi.com
+[pull]
+	rebase = false

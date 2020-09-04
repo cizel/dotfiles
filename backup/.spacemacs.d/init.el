@@ -262,6 +262,7 @@ It should only modify the values of Spacemacs settings."
         ;; refer to the DOCUMENTATION.org for more info on how to create your own
         ;; spaceline theme. Value can be a symbol or list with additional properties.
         ;; (default '(spacemacs :separator wave :separator-scale 1.5))
+        ;;dotspacemacs-mode-line-theme '(doom :separator wave :separator-scale 1.5)
         dotspacemacs-mode-line-theme '(doom :separator wave :separator-scale 1.5)
 
         ;; If non-nil the cursor color matches the state color in GUI Emacs.
@@ -270,7 +271,7 @@ It should only modify the values of Spacemacs settings."
 
         ;; Default font or prioritized list of fonts.
         dotspacemacs-default-font '("Fira Code"
-                                       :size 18
+                                       :size 16
                                        :weight normal
                                        :width normal
                                        :powerline-scale 1.2)
@@ -372,7 +373,7 @@ It should only modify the values of Spacemacs settings."
         ;; If non-nil the frame is maximized when Emacs starts up.
         ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
         ;; (default nil) (Emacs 24.4+ only)
-        dotspacemacs-maximized-at-startup nil
+        dotspacemacs-maximized-at-startup t
 
         ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
         ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
@@ -555,7 +556,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
     ;; evil cursor configuration
-    (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q"))) (add-hook 'evil-normal-state-entry-hook (lambda () (send-string-to-terminal "\033[0 q")))
+    ;;(add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q"))) (add-hook 'evil-normal-state-entry-hook (lambda () (send-string-to-terminal "\033[0 q")))
 
     ;; enable editorconfig
     ;;(editorconfig-mode 1)
