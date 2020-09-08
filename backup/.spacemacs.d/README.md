@@ -1,1 +1,0 @@
-# cizel spacemacs.d config
