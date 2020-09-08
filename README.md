@@ -1,7 +1,7 @@
 # cizel dotfiles 
 
 - vim
-- emacs (Spacemacs)
+- emacs (Doom emacs)
 - tmux (Oh My Tmux)
 - zsh (Oh My Zsh) 
 - git
@@ -43,4 +43,3 @@ script/bootstrap.sh
 ├── README.md
 └── bootstrap.sh
 ```
-

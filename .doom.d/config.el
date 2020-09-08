@@ -31,7 +31,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/.org/")
 
-(setq doom-font (font-spec :family "Fira Mono" :size 16))
+(setq doom-font (font-spec :family "Fira Mono" :size 14))
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -67,10 +67,14 @@
 (setq doom-modeline-icon (display-graphic-p))
 (setq doom-modeline-major-mode-icon t)
 
-;;plugn::lsp-mode
+;;plugin::lsp-mode
 (setq lsp-modeline-code-actions-enable nil)
 
+;;plugin::lsp-ui
+(setq lsp-ui-sideline-show-code-actions nil)
+
 ;;plugin::lsp-java
+(setq lsp-inhibit-message t)
 (setq path-to-lombok
       (expand-file-name
        "~/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar"

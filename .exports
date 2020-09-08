@@ -32,13 +32,10 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 # JAVA PATH
 if [ -x "/usr/libexec/java_home" ]; then
-    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+    export JAVA_HOME=`/usr/libexec/java_home -v 14`
 fi
 
 # GO Path
 export GOPATH=$HOME/work/go-code
 export GOBIN=$HOME/work/go-code/bin
 export GO111MODULE=on
-
-# brew
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles'
