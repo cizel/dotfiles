@@ -14,32 +14,52 @@ Run this:
 git clone https://github.com/cizel/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 script/bootstrap.sh
+# or without vim and emacs
+script/bootstrap-basic.sh
 ```
 
 ## Overview of Files
 
 ```
 .
+├── .aliases
+├── .doom.d
+│   ├── config.el
+│   ├── init.el
+│   └── packages.el
+├── .editorconfig
+├── .exports
 ├── .gitattributes
 ├── .gitconfig
 ├── .gitignore
-├── .spacemacs.d
-│   ├── custom.el
-│   ├── init.el
-│   ├── layers
-│   └── spacemacs.env
+├── .gitmodules
+├── .ssh.config.example
+├── .tmux
+│   ├── .tmux.conf
+│   ├── .tmux.conf.local
+│   ├── LICENSE.MIT
+│   ├── LICENSE.WTFPLv2
+│   └── README.md
 ├── .tmux.conf
 ├── .tmux.conf.local
 ├── .vim
+│   ├── .netrwhist
 │   ├── autoload
+│   ├── backup
 │   ├── colors
 │   ├── plugged
-│   └── snippets
+│   ├── plugins.vim
+│   ├── snippets
+│   ├── swap
+│   └── undo
 ├── .vimrc
-├── .vimrc_plugins
 ├── .zshrc
-├── .zshrc.local.example
-├── LICENSE
 ├── README.md
-└── bootstrap.sh
+└── script
+    ├── bootstrap-basic.sh
+    ├── bootstrap.sh
+    ├── brew-cask.sh
+    ├── brew-mirror.sh
+    ├── brew.sh
+    └── install.sh
 ```

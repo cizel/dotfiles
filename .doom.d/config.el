@@ -62,8 +62,10 @@
 (add-hook 'text-mode-hook 'set-bigger-spacing)
 (add-hook 'prog-mode-hook 'set-bigger-spacing)
 
+;;plugin::projectile
+
 ;;plugin::doom-modeline
-(setq doom-modeline-buffer-file-name-style 'file-name)
+(setq doom-modeline-buffer-file-name-style 'buffer-name)
 (setq doom-modeline-icon (display-graphic-p))
 (setq doom-modeline-major-mode-icon t)
 
@@ -74,7 +76,7 @@
 (setq lsp-ui-sideline-show-code-actions nil)
 
 ;;plugin::lsp-java
-(setq lsp-inhibit-message t)
+;(setq lsp-inhibit-message t)
 (setq path-to-lombok
       (expand-file-name
        "~/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar"
@@ -89,3 +91,9 @@
         ,(concat "-javaagent:" path-to-lombok)
         )
       )
+
+;;plugin::leetcode
+(setq leetcode-prefer-language "java")
+(setq leetcode-prefer-sql "mysql")
+(setq leetcode-save-solutions t)
+(setq leetcode-directory "~/work/.private/code/leetcode")
