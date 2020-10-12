@@ -63,6 +63,7 @@
 (add-hook 'prog-mode-hook 'set-bigger-spacing)
 
 ;;plugin::projectile
+(setq projectile-project-root-files '(".git" "GTAGS" "TAGS" ".projectile"))
 
 ;;plugin::doom-modeline
 (setq doom-modeline-buffer-file-name-style 'buffer-name)
