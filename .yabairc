@@ -15,7 +15,7 @@ yc window_opacity_duration      0.0
 yc active_window_opacity        1.0
 yc normal_window_opacity        0.90
 yc window_border                on
-yc window_border_width          6
+yc window_border_width          2
 yc active_window_border_color   0xff775759
 yc normal_window_border_color   0xff505050
 yc insert_feedback_color        0xffd75f5f
@@ -44,9 +44,7 @@ yr app='IINA' manage=off layer=above
 yr app='Finder' manage=off layer=above
 yr app='Keka' manage=off layer=above
 yr app='Contexts' manage=off layer=above
-
-yr app='Discord' space=5
-yr app='Spotify' space=6
+yr app='OmniFocus' manage=off layer=above
 
 # yabai signals
 ys event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
@@ -56,15 +54,7 @@ ys event=space_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'"
 
 # if using multple displays, add an additional rule for "display_changed" event
-ys event=display_changed \
+yabai -m signal --add event=display_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'"
-ys event=window_focused \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
-ys event=window_destroyed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
-ys event=window_created \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
-ys event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
 
 echo "yabai configuration loaded.."
