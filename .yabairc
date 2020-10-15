@@ -14,7 +14,7 @@ yc window_opacity               off
 yc window_opacity_duration      0.0
 yc active_window_opacity        1.0
 yc normal_window_opacity        0.90
-yc window_border                on
+yc window_border                off
 yc window_border_width          2
 yc active_window_border_color   0xff775759
 yc normal_window_border_color   0xff505050
@@ -45,16 +45,21 @@ yr app='Finder' manage=off layer=above
 yr app='Keka' manage=off layer=above
 yr app='Contexts' manage=off layer=above
 yr app='OmniFocus' manage=off layer=above
+yr app='Lark' manage=off layer=above
+#yr app='Miwork' manage=off layer=above
+#yr app='WeChat' manage=off layer=above
+#yr app='Emacs' manage=off layer=above
 
-# yabai signals
-ys event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-ys event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+
+# refresh my Übersicht bar when the space changes
+ys event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"spaces-widget\"'"
 
 ys event=space_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'"
 
 # if using multple displays, add an additional rule for "display_changed" event
-yabai -m signal --add event=display_changed \
+ysevent=display_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'"
 
 echo "yabai configuration loaded.."

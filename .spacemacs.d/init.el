@@ -37,6 +37,7 @@ This function should only modify configuration layer settings."
              ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
              ;; `M-m f e R' (Emacs style) to install them.
              ;; ----------------------------------------------------------------
+             (chinese :variables chinese-enable-fcitx t)
              (ivy :variables ivy-enable-advanced-buffer-information nil)
              better-defaults
              ranger
@@ -45,8 +46,6 @@ This function should only modify configuration layer settings."
              (syntax-checking :variables syntax-checking-enable-by-default nil
                  syntax-checking-enable-tooltips nil)
              (spell-checking :variables spell-checking-enable-by-default nil)
-             (spacemacs-layouts :variables layouts-enable-autosave nil
-                 layouts-autosave-delay 300)
              (git :variables
                  git-magit-status-fullscreen t
                  magit-push-always-verify nil
@@ -54,12 +53,11 @@ This function should only modify configuration layer settings."
                  magit-revert-buffers 'silent
                  magit-refs-show-commit-count 'all
                  magit-revision-show-gravatars nil)
-             (ibuffer :variables ibuffer-group-buffers-by 'projects)
              (auto-completion :variables auto-completion-enable-sort-by-usage t
                  auto-completion-enable-snippets-in-popup t
                  auto-completion-tab-key-behavior 'cycle
                  :disabled-for org markdown)
-             (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
+             (gtags :disabled-for clojure emacs-lisp java javascript latex python shell-scripts)
              (shell :variables shell-default-shell 'ansi-term)
              markdown
              org
@@ -73,7 +71,7 @@ This function should only modify configuration layer settings."
                  typescript-backend 'tide)
              emacs-lisp
              (php :packages php-mode company ggtags helm-gtags)
-             (chinese :variables chinese-enable-fcitx t)
+             (java :variables java-backend 'lsp)
              )
 
         ;; List of additional packages that will be installed without being
@@ -93,21 +91,21 @@ This function should only modify configuration layer settings."
         dotspacemacs-excluded-packages
         '(
              ;;spacemacs excluded package
-             org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
-             evil-args evil-ediff evil-exchange evil-unimpaired
-             evil-indent-plus volatile-highlights smartparens
-             spaceline holy-mode skewer-mode rainbow-delimiters
-             highlight-indentation vi-tilde-fringe eyebrowse ws-butler
-             smooth-scrolling org-repo-todo org-download org-timer
-             livid-mode git-gutter git-gutter-fringe  evil-escape
-             leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
-             ac-ispell ace-jump-mode auto-complete auto-dictionary
-             clang-format define-word google-translate disaster epic
-             fancy-battery org-present orgit orglue spacemacs-theme
-             helm-flyspell flyspell-correct-helm clean-aindent-mode
-             helm-c-yasnippet ace-jump-helm-line helm-make magithub
-             helm-themes helm-swoop helm-spacemacs-help smeargle
-             ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose pyim
+             ;;org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
+             ;;evil-args evil-ediff evil-exchange evil-unimpaired
+             ;;evil-indent-plus volatile-highlights smartparens
+             ;;spaceline holy-mode skewer-mode rainbow-delimiters
+             ;;highlight-indentation vi-tilde-fringe eyebrowse ws-butler
+             ;;smooth-scrolling org-repo-todo org-download org-timer
+             ;;livid-mode git-gutter git-gutter-fringe  evil-escape
+             ;;leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
+             ;;ac-ispell ace-jump-mode auto-complete auto-dictionary
+             ;;clang-format define-word google-translate disaster epic
+             ;;fancy-battery org-present orgit orglue spacemacs-theme
+             ;;helm-flyspell flyspell-correct-helm clean-aindent-mode
+             ;;helm-c-yasnippet ace-jump-helm-line helm-make magithub
+             ;;helm-themes helm-swoop helm-spacemacs-help smeargle
+             ;;ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose pyim
              )
 
         ;; Defines the behaviour of Spacemacs when installing packages.
@@ -228,7 +226,8 @@ It should only modify the values of Spacemacs settings."
         ;; List of themes, the first of the list is loaded when spacemacs starts.
         ;; Press `SPC T n' to cycle to the next theme in the list (works great
         ;; with 2 themes variants, one dark and one light)
-        dotspacemacs-themes '(spacemacs-dark
+        dotspacemacs-themes '(doom-one
+                                 spacemacs-dark
                                  spacemacs-light)
 
         ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -400,7 +399,7 @@ It should only modify the values of Spacemacs settings."
         ;;   :size-limit-kb 1000)
         ;; When used in a plist, `visual' takes precedence over `relative'.
         ;; (default nil)
-        dotspacemacs-line-numbers '(:visual t
+        dotspacemacs-line-numbers '(:relative nil
                                        :disabled-for-modes org-mode markdown-mode)
 
         ;; Code folding method. Possible values are `evil' and `origami'.
@@ -439,7 +438,7 @@ It should only modify the values of Spacemacs settings."
         ;; List of search tool executable names. Spacemacs uses the first installed
         ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
         ;; (default '("rg" "ag" "pt" "ack" "grep"))
-        dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+        dotspacemacs-search-tools '("ag" "rg" "pt" "ack" "grep")
 
         ;; Format specification for setting the frame title.
         ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -502,7 +501,13 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     ;;解决启动报错问题
     (setq exec-path-from-shell-arguments '("-l"))
 
-    ;;custom to custom.el
+    ;;plugin::doom-modeline
+    (setq doom-modeline-buffer-file-name-style 'buffer-name)
+    (setq doom-modeline-icon (display-graphic-p))
+    (setq doom-modeline-major-mode-icon t)
+
+
+    ;;custom.el
     (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
     (load custom-file 'no-error 'no-message)
     )
@@ -522,6 +527,14 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+    ;;window tiling
+    (setq frame-resize-pixelwise t)
+
+    (setq url-proxy-services
+        '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+             ("http" . "127.0.0.1:1087")
+             ("https" . "127.0.0.1:1087")))
+
     (set-frame-parameter nil 'internal-border-width 20)
 
     (defun set-bigger-spacing ()
@@ -533,6 +546,29 @@ before packages are loaded."
     (add-to-list 'auto-mode-alist '("views.*\\.php\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
     (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+    ;;plugin::lsp-mode
+    (setq lsp-modeline-code-actions-enable nil)
+
+    ;;plugin::lsp-ui
+    (setq lsp-ui-sideline-show-code-actions nil)
+
+    ;;plugin::lsp-java
+    (setq path-to-lombok
+        (expand-file-name
+            "~/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar"
+            )
+        )
+    (setq lsp-java-vmargs
+        `(
+             "-Xmx4G"
+             "-XX:+UseG1GC"
+             "-XX:+UseStringDeduplication"
+             "-noverify"
+             ,(concat "-javaagent:" path-to-lombok)
+             )
+        )
+
     )
 
 (defun dotspacemacs/emacs-custom-settings ()
