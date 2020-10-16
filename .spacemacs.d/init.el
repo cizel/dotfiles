@@ -40,7 +40,7 @@ This function should only modify configuration layer settings."
              (chinese :variables chinese-enable-fcitx t)
              (ivy :variables ivy-enable-advanced-buffer-information nil)
              better-defaults
-             ranger
+             (ibuffer :variables ibuffer-group-buffers-by 'projects)
              emoji
              colors
              (syntax-checking :variables syntax-checking-enable-by-default nil
@@ -438,7 +438,7 @@ It should only modify the values of Spacemacs settings."
         ;; List of search tool executable names. Spacemacs uses the first installed
         ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
         ;; (default '("rg" "ag" "pt" "ack" "grep"))
-        dotspacemacs-search-tools '("ag" "rg" "pt" "ack" "grep")
+        dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
 
         ;; Format specification for setting the frame title.
         ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -506,6 +506,12 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (setq doom-modeline-icon (display-graphic-p))
     (setq doom-modeline-major-mode-icon t)
 
+    (setq url-proxy-services
+        '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+             ("http" . "127.0.0.1:1087")
+             ("https" . "127.0.0.1:1087")))
+
+    (set-frame-parameter nil 'internal-border-width 20)
 
     ;;custom.el
     (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
@@ -527,20 +533,16 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-    ;;window tiling
-    (setq frame-resize-pixelwise t)
-
-    (setq url-proxy-services
-        '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
-             ("http" . "127.0.0.1:1087")
-             ("https" . "127.0.0.1:1087")))
-
-    (set-frame-parameter nil 'internal-border-width 20)
-
+    ;; Setting font line height
     (defun set-bigger-spacing ()
         (setq-local default-text-properties '(line-spacing 0.1 line-height 1.5 )))
     (add-hook 'text-mode-hook 'set-bigger-spacing)
     (add-hook 'prog-mode-hook 'set-bigger-spacing)
+
+    ;; org chinese font
+    (when (configuration-layer/layer-usedp 'chinese)
+        (when (and (spacemacs/system-is-mac) window-system)
+            (spacemacs//set-monospaced-font "Fira Code" "PingFang SC" 14 16)))
 
     ;; js-mode configuration
     (add-to-list 'auto-mode-alist '("views.*\\.php\\'" . web-mode))
@@ -569,13 +571,6 @@ before packages are loaded."
              )
         )
 
-    )
-
-(defun dotspacemacs/emacs-custom-settings ()
-    "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
     )
 
 ;; Do not write anything past this comment. This is where Emacs will

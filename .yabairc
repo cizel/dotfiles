@@ -15,7 +15,7 @@ yc window_opacity_duration      0.0
 yc active_window_opacity        1.0
 yc normal_window_opacity        0.90
 yc window_border                off
-yc window_border_width          2
+yc window_border_width          4
 yc active_window_border_color   0xff775759
 yc normal_window_border_color   0xff505050
 yc insert_feedback_color        0xffd75f5f
@@ -46,9 +46,9 @@ yr app='Keka' manage=off layer=above
 yr app='Contexts' manage=off layer=above
 yr app='OmniFocus' manage=off layer=above
 yr app='Lark' manage=off layer=above
-#yr app='Miwork' manage=off layer=above
-#yr app='WeChat' manage=off layer=above
-#yr app='Emacs' manage=off layer=above
+yr app='Miwork' manage=off layer=above
+yr app='WeChat' manage=off layer=above
+yr app="CleanMyMac X$" manage=off layer=above
 
 
 # refresh my Übersicht bar when the space changes
