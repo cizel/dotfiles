@@ -5,12 +5,14 @@ alias uss='unset http_proxy; unset https_proxy'
 alias more="less"
 
 alias vi="vim"
-
-alias e="emacs -nw"
+alias e="emacsclient"
 
 # common
 
-alias ips="ifconfig | grep -E '\d+\.\d+\.\d+\.\d+ netmask' | awk '{print $2}' | sed -n '2p'"
+alias ips="ifconfig | grep -E '\d+\.\d+\.\d+\.\d+ netmask' | grep -v '127.0.0.1' | awk '{print $2}'"
+
+alias http="python3 -m http.server"
+
 
 alias qemu="qemu-system-x86_64"
 

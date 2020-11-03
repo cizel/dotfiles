@@ -1,0 +1,58 @@
+#!/usr/bin/env sh
+
+alias yc='yabai -m config'
+alias yr='yabai -m rule --add'
+alias ys='yabai -m signal --add'
+
+# global settings
+yc mouse_follows_focus          off
+yc focus_follows_mouse          off
+yc window_placement             second_child
+yc window_topmost               off
+yc window_shadow                on
+yc window_opacity               off
+yc window_opacity_duration      0.0
+yc active_window_opacity        1.0
+yc normal_window_opacity        0.90
+yc window_border                off
+yc window_border_width          4
+yc active_window_border_color   0xff775759
+yc normal_window_border_color   0xff505050
+yc insert_feedback_color        0xffd75f5f
+yc split_ratio                  0.50
+yc auto_balance                 off
+yc mouse_modifier               fn
+yc mouse_action1                move
+yc mouse_action2                resize
+yc mouse_drop_action            swap
+
+# general space settings
+yc layout                       bsp
+yc top_padding                  12
+yc bottom_padding               12
+yc left_padding                 12
+yc right_padding                12
+yc window_gap                   06
+#yc external_bar                 main:20:0
+
+# yabai rules
+yr title='Preferences$' manage=off
+yr title='Opening$' manage=off
+yr app='System Preferences' manage=off
+yr app='App Store' manage=off
+yr app='IINA' manage=off
+yr app='Finder' manage=off
+yr app='Keka' manage=off
+yr app='Contexts' manage=off
+yr app='OmniFocus' manage=off
+yr app='work$' manage=off
+yr app='WeChat' manage=off
+yr app='CleanMyMac X$' manage=off
+yr app='^MiRen' manage=off
+yr app='MuMu$' manage=off
+yr app='^Nutstore' manage=off
+yr app='^Nirvana' manage=off
+yr app='^START' manage=off
+yr app='NeteaseMusic' manage=off
+
+echo "yabai configuration loaded.."

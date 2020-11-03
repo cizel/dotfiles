@@ -37,6 +37,9 @@ antigen apply
 # exports
 [[ -f ~/.exports ]] && source ~/.exports
 
+# functions
+[[ -f ~/.funcs ]] && source ~/.funcs
+
 ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
 pasteinit() {
     OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
