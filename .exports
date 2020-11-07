@@ -18,13 +18,13 @@ export PURE_GIT_DOWN_ARROW=⇣
 export PURE_GIT_UP_ARROW=⇡
 
 # PATH
-export PATH="$HOME/work/go-code/bin:$PATH"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.private/bin:$PATH"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/php@7.2/bin:$PATH"
 export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 export PATH="/usr/local/opt/node@10/bin:$PATH"
+export PATH="$PATH:$HOME/work/go-code/bin"
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # MANPATH
 export MANPATH="/usr/local/man:$MANPATH"

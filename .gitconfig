@@ -45,7 +45,7 @@
 [gpg]
     program = gpg
 [user]
-	team = devolop-3-x
+	team = devolop-3-5
 	name = shizhen
 	email = shizhen@xiaomi.com
 [pull]
