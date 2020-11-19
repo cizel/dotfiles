@@ -4,6 +4,10 @@ alias yc='yabai -m config'
 alias yr='yabai -m rule --add'
 alias ys='yabai -m signal --add'
 
+# support macOS Big Sur
+sudo yabai --load-sa
+ys event=dock_did_restart action="sudo yabai --load-sa"
+
 # global settings
 yc mouse_follows_focus          off
 yc focus_follows_mouse          off
@@ -28,11 +32,11 @@ yc mouse_drop_action            swap
 
 # general space settings
 yc layout                       bsp
-yc top_padding                  12
-yc bottom_padding               12
-yc left_padding                 12
-yc right_padding                12
-yc window_gap                   06
+yc top_padding                  10
+yc bottom_padding               10
+yc left_padding                 10
+yc right_padding                10
+yc window_gap                   05
 #yc external_bar                 main:20:0
 
 # yabai rules
@@ -54,5 +58,6 @@ yr app='^Nutstore' manage=off
 yr app='^Nirvana' manage=off
 yr app='^START' manage=off
 yr app='NeteaseMusic' manage=off
+yr app='^InteliJ' manage=off
 
 echo "yabai configuration loaded.."
