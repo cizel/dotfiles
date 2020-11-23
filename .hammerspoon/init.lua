@@ -1,6 +1,6 @@
 local hyper = {'ctrl', 'option'}
-local hyper2 = {'alt'}
-local hyper3 = {'alt', 'shift'}
+local hyper2 = {'shift', 'option'}
+local hyper3 = {'option'}
 
 -- Init speaker.
 speaker = hs.speech.new()
@@ -8,8 +8,7 @@ speaker = hs.speech.new()
 -- Yabai
 local yabai = "/usr/local/bin/yabai -m"
 local windows = {'1', '2', '3', '4', '5', '6'}
-
--- applications: alt [hjkl]
+-- applications: hyper2 [hjkl]
 local key2App = {
   h = '/Applications/Google Chrome.app',
   j = '/Applications/Alacritty.app',
@@ -23,10 +22,11 @@ for key, appPath in pairs(key2App) do
   end)
 end
 
--- Spaces:  Alt + [NUM]
+
+-- Spaces:  hyper3 + [NUM]
 for i, v in ipairs(windows) do
   hs.hotkey.bind(
-    hyper2, v,
+    hyper3, v,
     function()
       local command = "%s space --focus %s"
       hs.execute(string.format(command, yabai, v))
@@ -35,7 +35,7 @@ for i, v in ipairs(windows) do
   end)
 end
 
--- Rotate windows clockwise and anticlockwise
+-- Rotate windows: hyper2 + r
 hs.hotkey.bind(
   hyper2, 'r',
   function()
@@ -44,19 +44,33 @@ hs.hotkey.bind(
 end)
 
 
---- Move to workspace: Shift + Alt + [NUM]
+-- Move to workspace: hyper2 + [NUM]
 for i, v in ipairs(windows) do
   hs.hotkey.bind(
-    hyper3, v,
+    hyper2, v,
     function()
       local command = "%s window --space %s && %s space --focus %s"
       hs.execute(string.format(command, yabai, v, yabai, v))
   end)
 end
 
+-- # Windows: hyper2 + [DIR]
 
+local directions = {
+  h = 'west',
+  j = 'south',
+  k = 'north',
+  l = 'east'
+}
 
-local spaceIcon = hs.menubar.new()
+for key, v in ipairs(directions) do
+  hs.hotkey.bind(
+    hyper2, key,
+    function()
+      local command = "%s window --focus %s"
+      hs.execute(string.format(command, yabai, v))
+  end)
+end
 
 -- Reload config.
 hs.hotkey.bind(
@@ -66,7 +80,7 @@ hs.hotkey.bind(
 end)
 
 -- We put reload notify at end of config, notify popup mean no error in config.
-hs.notify.new({title="Manatee", informativeText="Andy, I am online!"}):send()
+hs.notify.new({title="Cizel", informativeText="Andy, I am online!"}):send()
 
 -- Speak something after configuration success.
 speaker:speak("Andy, I am online!")

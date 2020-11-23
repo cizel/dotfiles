@@ -59,5 +59,6 @@ yr app='^Nirvana' manage=off
 yr app='^START' manage=off
 yr app='NeteaseMusic' manage=off
 yr app='^InteliJ' manage=off
+yr app='^zoom' manage=off
 
 echo "yabai configuration loaded.."
