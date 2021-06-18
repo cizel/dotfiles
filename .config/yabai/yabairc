@@ -1,5 +1,18 @@
 #!/usr/bin/env sh
 
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# .. more yabai startup stuff
+
 alias yc='yabai -m config'
 alias yr='yabai -m rule --add'
 alias ys='yabai -m signal --add'
@@ -32,11 +45,11 @@ yc mouse_drop_action            swap
 
 # general space settings
 yc layout                       bsp
-yc top_padding                  10
-yc bottom_padding               10
-yc left_padding                 10
-yc right_padding                10
-yc window_gap                   05
+yc top_padding                  5
+yc bottom_padding               5
+yc left_padding                 5
+yc right_padding                5
+yc window_gap                   10
 #yc external_bar                 main:20:0
 
 # yabai rules
@@ -60,5 +73,18 @@ yr app='^START' manage=off
 yr app='NeteaseMusic' manage=off
 yr app='^InteliJ' manage=off
 yr app='^zoom' manage=off
+yr app='^Sequel Pro' manage=off
+yr app='^MindNode' manage=off
+yr app='^HIPOS' manage=off
+yr app='^Toolbox' manage=off
+yr app='^IntelliJ' manage=off
+yr app='^Preview' manage=off
+yr app='^QQ' manage=off
+yr app='^PDF' manage=off
+yr app='^Activity' manage=off
+yr app='^Notion' manage=off
+yr app='^Cisco' manage=off
+yr app='^Baidu' manage=off
+yr app='^VMware' manage=off
 
 echo "yabai configuration loaded.."

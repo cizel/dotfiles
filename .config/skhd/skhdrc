@@ -2,11 +2,8 @@
 # Navigation (focussing)
 ##############################################
 
-alt + shift - h : open "/Applications/Alacritty.app"
-alt + shift - j : open "/Applications/Emacs.app"
-alt + shift - k : open "/Applications/Google\ Chrome.app"
-alt + shift - l : open "/Applications/Google\ Chrome.app"
-alt + shift - w : open "/Applications/WeChat.app"
+# Apps: Alt + [KEY]
+alt - return : open -n "/Applications/Alacritty.app"
 
 # Spaces:  Alt + [NUM]
 alt - 1 : yabai -m space --focus 1
@@ -57,7 +54,7 @@ alt - r         : yabai -m space --rotate 90
 shift + alt - space : yabai -m window --toggle float
 
 # Restart Yabai
-alt + shift - r : brew service restart skhd
+shift + alt - r : brew service restart skhd
 
 # Make window native fullscreen
 alt - f         : yabai -m window --toggle zoom-fullscreen
