@@ -1,32 +1,40 @@
-export ANTIGEN_PATH=~/.dotfiles
-source $ANTIGEN_PATH/antigen/antigen.zsh
+export ZINIT_PATH=~/.dotfiles
+source $ZINIT_PATH/zinit/zinit.zsh
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle z
-antigen bundle tig
-antigen bundle brew
-antigen bundle tmux
-antigen bundle docker
-antigen bundle mvn
+# Bundles from ohmyzsh lib.
+zinit snippet OMZL::git.zsh
+zinit snippet OMZP::git
+zinit snippet OMZP::tig
+zinit snippet OMZP::brew
+zinit snippet OMZP::tmux
+zinit snippet OMZP::mvn
+zinit cdclear -q
 
 # extra bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
+zinit ice lucid wait depth"1"
+zinit light zsh-users/zsh-syntax-highlighting
+
+zinit ice lucid wait depth"1"
+zinit light zsh-users/zsh-autosuggestions
+
+zinit ice lucid wait depth"1"
+zinit light rupa/z
+
+#Load the oh-my-zsh's library.
+zinit light ohmyzsh/ohmyzsh
+
 
 # Load the theme.
 if [ "$(uname)" = 'Darwin' ]; then
-    antigen bundle mafredri/zsh-async
-    antigen bundle sindresorhus/pure
+    zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+    zinit light sindresorhus/pure
 else
-    antigen theme robbyrussell
+	setopt promptsubst
+	zinit snippet OMZT::robbyrussell
 fi
 
-# Tell Antigen that you're done.
-antigen apply
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
