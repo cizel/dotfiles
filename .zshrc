@@ -1,32 +1,34 @@
-export ANTIGEN_PATH=~/.dotfiles
-source $ANTIGEN_PATH/antigen/antigen.zsh
+export ZPLUG_PATH=~/.dotfiles
+source $ZPLUG_PATH/zplug/init.zsh
 
 # Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+zplug "ohmyzsh/ohmyzsh"
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle z
-antigen bundle tig
-antigen bundle brew
-antigen bundle tmux
-antigen bundle docker
-antigen bundle mvn
+zplug "plugins/git", from: "oh-my-zsh"
 
 # extra bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
+zplug "rupa/z"
+zplug "tcnksm/docker-alias", use:zshrc
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
 
 # Load the theme.
 if [ "$(uname)" = 'Darwin' ]; then
-    antigen bundle mafredri/zsh-async
-    antigen bundle sindresorhus/pure
+    zplug mafredri/zsh-async
+    zplug sindresorhus/pure
 else
-    antigen theme robbyrussell
+    zplug 'dracula/zsh', as:theme
 fi
 
-# Tell Antigen that you're done.
-antigen apply
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    #zplug install
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
