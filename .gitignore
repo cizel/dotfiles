@@ -49,3 +49,5 @@ grumphp.yml
 .settings
 .classpath
 .factorypath
+
+.ac-php-conf.json
