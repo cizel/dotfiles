@@ -28,9 +28,6 @@ brew install z
 # run this script when this file changes guy.
 brew install entr
 
-# github util. gotta love `hub fork`, `hub create`, `hub checkout <PRurl>`
-brew install hub
-
 # Install other useful binaries
 brew install the_silver_searcher
 brew install fzf
@@ -56,9 +53,6 @@ brew install ruby
 brew install php
 brew install go
 brew install python
-brew install python@2
-brew install glide
-brew install yarn
 
 # useful tools
 brew install tig
@@ -67,8 +61,6 @@ brew install tldr
 brew install bat
 brew install privoxy
 brew install proxychains-ng
-brew install caddy
-brew install hugo
 
 # edit
 brew install editorconfig

@@ -86,5 +86,7 @@ yr app='^Notion' manage=off
 yr app='^Cisco' manage=off
 yr app='^Baidu' manage=off
 yr app='^VMware' manage=off
+yr app='^Lark' manage=off
+yr app='^小米' manage=off
 
 echo "yabai configuration loaded.."

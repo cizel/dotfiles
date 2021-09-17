@@ -3,38 +3,46 @@
 # Install native apps
 
 # dev
-brew cask install emacs
-brew cask install java
-brew cask install android-platform-tools
-brew cask install shadowsocksx-ng-r
-brew cask install wireshark
-brew cask install sequel-pro
-brew cask install visual-studio-code
-brew cask install virtualbox
+brew install emacs --cask
+brew install openjdk@8 --cask
+brew cask openjdk --cask
+brew install android-platform-tools --cask
+brew install wireshark --cask
+brew install sequel-pro --cask
+brew install visual-studio-code --cask
+brew install virtualbox --cask
 
 # daily
-brew cask install alfred
-brew cask install iterm2
-brew cask install eudic
-brew cask install teamviewer
-brew cask install anki
-brew cask install baidunetdisk
+brew install alfred --cask
+brew install alacritty --cask
+brew install eudic --cask
+brew install anki --cask
+brew install baidunetdisk --cask
+brew install evernote --cask
+brew install jietu --cask
+brew install v2rayu --cask
+brew install hiddenbar --cask
+brew install whichspace --cask
 
 # fun
-brew cask install wechat
-brew cask install qq
-brew cask install neteasemusic
+brew install wechat --cask
+brew install qq --cask
+brew install qqmusic --cask
 
 # browsers
-brew cask install google-chrome
-brew cask install chromium
+brew install google-chrome --cask
+brew install chromium --cask
 
 # font
 brew tap caskroom/font
-brew cask install font-fira-code
-brew cask install font-source-code-pro
+brew install font-fira-code --cask
+brew install font-fira-mono --cask
+brew install font-source-code-pro --cask
+brew install font-droid-sans-mono-for-powerline --cask
+brew install font-droidsansmono-nerd-font --cask
 
 # less often
-brew cask install folx
+brew install folx --cask
+brew install pomotodo --cask
 
 # Not on cask but I want regardless.

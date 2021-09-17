@@ -20,7 +20,7 @@ export PURE_GIT_UP_ARROW=⇡
 # PATH
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/node@10/bin:$PATH"
+export PATH="/usr/local/opt/node@12/bin:$PATH"
 export PATH="$HOME/workspace/go-code/bin:$PATH"
 export PATH="$HOME/workspace/anti-code/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -30,7 +30,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 # JAVA PATH
 if [ -x "/usr/libexec/java_home" ]; then
-    unset JAVA_HOME; export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_282`
+    unset JAVA_HOME; export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 fi
 
 # GO Path
