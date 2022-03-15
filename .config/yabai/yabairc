@@ -88,5 +88,8 @@ yr app='^Baidu' manage=off
 yr app='^VMware' manage=off
 yr app='^Lark' manage=off
 yr app='^小米' manage=off
+yr app='^DataGrip' manage=off
+yr app='^印象笔记' manage=off
+yr app='^Calendar' manage=off
 
 echo "yabai configuration loaded.."

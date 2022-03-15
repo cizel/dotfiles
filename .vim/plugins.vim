@@ -2,13 +2,11 @@ call plug#begin("~/.vim/plugged")
 
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-vinegar'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "Plug 'kien/ctrlp.vim'
 Plug 'ctrlpvim/ctrlp.vim' "find class method
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'tpope/vim-surround'
-"Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'rking/ag.vim'
 Plug 'skwp/greplace.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -20,6 +18,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive' "git
+Plug 'scrooloose/nerdtree'
 "Plug 'editorconfig/editorconfig-vim'
 "Plug 'scrooloose/nerdcommenter'
 "Plug 'elzr/vim-json'

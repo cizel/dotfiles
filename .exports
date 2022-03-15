@@ -19,8 +19,8 @@ export PURE_GIT_UP_ARROW=⇡
 
 # PATH
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/node@12/bin:$PATH"
+export PATH="/usr/local/opt/php@7.4/bin:$PATH"
+export PATH="/usr/local/opt/node@14/bin:$PATH"
 export PATH="$HOME/workspace/go-code/bin:$PATH"
 export PATH="$HOME/workspace/anti-code/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"

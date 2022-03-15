@@ -49,3 +49,5 @@ grumphp.yml
 .settings
 .classpath
 .factorypath
+
+.config/gatsby/
