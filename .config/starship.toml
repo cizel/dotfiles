@@ -1,0 +1,45 @@
+add_newline = false
+command_timeout = 1000
+format = "$username$hostname$directory$git_branch$git_status$line_break$character"
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[>](bold red)"
+vimcmd_symbol = "[<](bold green)"
+
+[cmd_duration]
+disabled = false
+min_time = 1500
+format = " [$duration](242)"
+
+[directory]
+format = "[$path]($style)"
+style = "bold cyan"
+truncate_to_repo = false
+truncation_length = 3
+
+[git_branch]
+format = " [$symbol$branch]($style)"
+style = "bold magenta"
+symbol = ""
+
+[git_status]
+format = "([$ahead_behind$modified$staged$untracked$deleted$renamed$conflicted]($style))"
+style = "red"
+ahead = "up:"
+behind = "down:"
+diverged = "up:${ahead_count} down:${behind_count}"
+modified = "*"
+staged = "+"
+untracked = "?"
+deleted = "x"
+renamed = "r"
+conflicted = "!"
+
+[hostname]
+format = "[$hostname](242):"
+ssh_only = true
+
+[username]
+format = "[$user](242)@"
+show_always = false

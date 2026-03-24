@@ -1,195 +1,159 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# this symlinks all the dotfiles (and .vim/) to ~/
-# it also symlinks ~/bin for easy updating
+set -euo pipefail
 
-# this is safe to run multiple times and will prompt you about anything unclear
+DOTFILES_PATH="${DOTFILES_PATH:-$HOME/.dotfiles}"
+BACKUP_ROOT="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles-backups"
+TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
+BACKUP_DIR="${BACKUP_ROOT}/${TIMESTAMP}"
+INSTALL_TOOLS=0
+SKIP_SUBMODULES=0
 
+link_targets=(
+  ".aliases"
+  ".config"
+  ".editorconfig"
+  ".exports"
+  ".funcs"
+  ".gitattributes"
+  ".gitconfig"
+  ".gitignore"
+  ".gitmodules"
+  ".hammerspoon"
+  ".ssh.config.example"
+  ".tmux.conf"
+  ".tmux.conf.local"
+  ".vim"
+  ".vimrc"
+  ".zshrc"
+)
 
-# this is a messy edit of alrra's nice work here:
-#   https://raw.githubusercontent.com/alrra/dotfiles/master/os/create_symbolic_links.sh
-#   it should and needs to be improved to be less of a hack.
-
-
-
-# jump down to line ~140 for the start.
-
-
-#
-# utils !!!
-#
-
-
-answer_is_yes() {
-    [[ "$REPLY" =~ ^[Yy]$ ]] \
-        && return 0 \
-        || return 1
+log() {
+  printf '%s\n' "$*"
 }
 
-ask() {
-    print_question "$1"
-    read
+warn() {
+  printf 'warning: %s\n' "$*" >&2
 }
 
-ask_for_confirmation() {
-    print_question "$1 (y/n) "
-    read -n 1
-    printf "\n"
+die() {
+  printf 'error: %s\n' "$*" >&2
+  exit 1
 }
 
-ask_for_sudo() {
+usage() {
+  cat <<'EOF'
+Usage: ./script/bootstrap.sh [--with-tools] [--skip-submodules]
 
-    # Ask for the administrator password upfront
-    sudo -v
-
-    # Update existing `sudo` time stamp until this script has finished
-    # https://gist.github.com/cowboy/3118588
-    while true; do
-        sudo -n true
-        sleep 60
-        kill -0 "$$" || exit
-    done &> /dev/null &
-
+  --with-tools      Run script/install-shell-tools.sh after symlinking dotfiles
+  --skip-submodules Skip git submodule initialization
+EOF
 }
 
-cmd_exists() {
-    [ -x "$(command -v "$1")" ] \
-        && printf 0 \
-        || printf 1
+confirm() {
+  local prompt="$1"
+  local reply
+  read -r -p "${prompt} [y/N] " reply
+  [[ "${reply:-}" =~ ^[Yy]$ ]]
 }
 
-execute() {
-    $1 &> /dev/null
-    print_result $? "${2:-$1}"
+ensure_repo() {
+  [[ -d "${DOTFILES_PATH}" ]] || die "dotfiles repo not found at ${DOTFILES_PATH}"
 }
 
-get_answer() {
-    printf "$REPLY"
+ensure_backup_dir() {
+  mkdir -p "${BACKUP_DIR}"
 }
 
-get_os() {
+backup_target() {
+  local target="$1"
+  local name
+  name="$(basename "${target}")"
+  ensure_backup_dir
+  mv "${target}" "${BACKUP_DIR}/${name}"
+  log "backed up ${target} -> ${BACKUP_DIR}/${name}"
+}
 
-    declare -r OS_NAME="$(uname -s)"
-    local os=""
+link_target() {
+  local rel="$1"
+  local source="${DOTFILES_PATH}/${rel}"
+  local target="${HOME}/${rel}"
 
-    if [ "$OS_NAME" == "Darwin" ]; then
-        os="osx"
-    elif [ "$OS_NAME" == "Linux" ] && [ -e "/etc/lsb-release" ]; then
-        os="ubuntu"
+  [[ -e "${source}" || -L "${source}" ]] || {
+    warn "skipping missing source ${source}"
+    return 0
+  }
+
+  if [[ -L "${target}" ]] && [[ "$(readlink "${target}")" == "${source}" ]]; then
+    log "ok ${target} -> ${source}"
+    return 0
+  fi
+
+  if [[ -e "${target}" || -L "${target}" ]]; then
+    if confirm "${target} exists. Back it up and replace it?"; then
+      backup_target "${target}"
+    else
+      warn "left existing target untouched: ${target}"
+      return 0
     fi
+  fi
 
-    printf "%s" "$os"
-
+  ln -s "${source}" "${target}"
+  log "linked ${target} -> ${source}"
 }
 
-is_git_repository() {
-    [ "$(git rev-parse &>/dev/null; printf $?)" -eq 0 ] \
-        && return 0 \
-        || return 1
+init_submodules() {
+  if (( SKIP_SUBMODULES )); then
+    return 0
+  fi
+
+  if [[ -f "${DOTFILES_PATH}/.gitmodules" ]] && command -v git >/dev/null 2>&1; then
+    git -C "${DOTFILES_PATH}" submodule update --init --recursive .tmux
+  fi
 }
 
-mkd() {
-    if [ -n "$1" ]; then
-        if [ -e "$1" ]; then
-            if [ ! -d "$1" ]; then
-                print_error "$1 - a file with the same name already exists!"
-            else
-                print_success "$1"
-            fi
-        else
-            execute "mkdir -p $1" "$1"
-        fi
-    fi
+install_tools() {
+  local installer="${DOTFILES_PATH}/script/install-shell-tools.sh"
+
+  [[ -x "${installer}" ]] || die "tool installer is missing or not executable: ${installer}"
+  "${installer}"
 }
 
-print_error() {
-    # Print output in red
-    printf "\e[0;31m  [✖] $1 $2\e[0m\n"
-}
-
-print_info() {
-    # Print output in purple
-    printf "\n\e[0;35m $1\e[0m\n\n"
-}
-
-print_question() {
-    # Print output in yellow
-    printf "\e[0;33m  [?] $1\e[0m"
-}
-
-print_result() {
-    [ $1 -eq 0 ] \
-        && print_success "$2" \
-        || print_error "$2"
-
-    [ "$3" == "true" ] && [ $1 -ne 0 ] \
-        && exit
-}
-
-print_success() {
-    # Print output in green
-    printf "\e[0;32m  [✔] $1\e[0m\n"
-}
-
-
-
-
-
-
-#
-# actual symlink stuff
-#
-
-
-# finds all .dotfiles in this folder
-declare DOTFILES_PATH=$HOME/.dotfiles
-
-declare -a FILES_TO_SYMLINK=$(find $DOTFILES_PATH -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .osx | sed -e 's|'$DOTFILES_PATH'/||' | sed -e 's|//|/|' | sed -e 's|\./\.|.|')
-FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim .config .hammerspoon" # add in vim and the binaries
-
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-init() {
-
-    execute "git submodule update --init"
-
-    # update .tmux.conf
-    execute "ln -f $DOTFILES_PATH/.tmux/.tmux.conf $DOTFILES_PATH"
+parse_args() {
+  while (($#)); do
+    case "$1" in
+      --with-tools)
+        INSTALL_TOOLS=1
+        ;;
+      --skip-submodules)
+        SKIP_SUBMODULES=1
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      *)
+        die "unknown argument: $1"
+        ;;
+    esac
+    shift
+  done
 }
 
 main() {
+  parse_args "$@"
+  ensure_repo
+  init_submodules
 
-    local i=""
-    local sourceFile=""
-    local targetFile=""
+  for rel in "${link_targets[@]}"; do
+    link_target "${rel}"
+  done
 
-    for i in ${FILES_TO_SYMLINK[@]}; do
+  if (( INSTALL_TOOLS )); then
+    install_tools
+  fi
 
-        sourceFile="$DOTFILES_PATH/$i"
-        targetFile="$HOME/$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
-
-        if [ -e "$targetFile" ]; then
-            if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
-
-                ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
-                if answer_is_yes; then
-                    rm -rf "$targetFile"
-                    execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
-                else
-                    print_error "$targetFile → $sourceFile"
-                fi
-
-            else
-                print_success "$targetFile → $sourceFile"
-            fi
-        else
-            execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
-        fi
-
-    done
-
+  log "bootstrap complete"
 }
 
-init
-main
+main "$@"

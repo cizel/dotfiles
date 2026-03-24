@@ -5,3 +5,10 @@ configstore
 SweetScape
 wireshark
 gns3
+clawhub
+gogcli
+shell_gpt/.sgptrc
+atuin/atuin-receipt.json
+systemd/
+systemd/user/default.target.wants
+systemd/user/*.bak

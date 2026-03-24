@@ -4,6 +4,7 @@ viminfo
 
 # git credential file
 .gitconfig.local
+.gitconfig.work
 
 # no thx
 node_modules
@@ -25,6 +26,16 @@ Thumbs.db
 
 # zsh
 .zshrc.local
+
+# local secrets and machine-specific config
+.secrets
+.env
+.config/atuin/atuin-receipt.json
+.config/clawhub/
+.config/gogcli/
+.config/shell_gpt/.sgptrc
+.config/systemd/user/default.target.wants/
+.config/systemd/user/*.bak
 
 # emacs
 spacemacs.env

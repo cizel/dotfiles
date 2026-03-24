@@ -1,25 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-echo "Setting up your Mac..."
+set -euo pipefail
 
-# Check for Homebrew and install if we don't have it
-if test ! $(which brew); then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+cat <<'EOF'
+script/install.sh is deprecated.
 
-# Update Homebrew recipes
-brew update
+Use one of these instead:
+  1. ./script/bootstrap.sh
+  2. ./script/install-shell-tools.sh
 
-# Install all our dependencies with bundle (See Brewfile)
-# brew tap homebrew/bundle
-# brew bundle
-
-source ./brew.sh
-source ./brew-cask.sh
-
-# Make ZSH the default shell environment
-chsh -s $(which zsh)
-
-# Set macOS preferences
-# We will run this last because this will reload the shell
-# source .macos
+If you still want a macOS-specific installer, rebuild this script around the
+current Homebrew installation flow instead of the legacy Ruby bootstrap path.
+EOF

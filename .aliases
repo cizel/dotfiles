@@ -1,18 +1,5 @@
-# aliases
-alias ss='export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;'
-alias uss='unset http_proxy; unset https_proxy'
+# Compatibility shim for the modular zsh layout.
+[[ -f "$HOME/.config/zsh/aliases.zsh" ]] && source "$HOME/.config/zsh/aliases.zsh"
 
-alias more="less"
-
-alias vi="vim"
-alias e="emacsclient"
-
-# common
-
-alias ips="ifconfig | grep -E '\d+\.\d+\.\d+\.\d+ netmask' | grep -v '127.0.0.1' | awk '{print $2}'"
-
-alias http="python3 -m http.server"
-
-
-alias qemu="qemu-system-x86_64"
-
+alias ss='proxy_on'
+alias uss='proxy_off'

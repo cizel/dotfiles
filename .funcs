@@ -1,5 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
-function which-package () {
-    $("osascript -e 'id of app \"$1\"'")
-}
+# Compatibility shim for the modular zsh layout.
+[[ -f "$HOME/.config/zsh/functions.zsh" ]] && source "$HOME/.config/zsh/functions.zsh"

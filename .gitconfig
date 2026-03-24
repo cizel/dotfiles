@@ -1,5 +1,5 @@
 [core]
-    editor = /usr/bin/vim
+    editor = vim
     filemode = false
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
@@ -32,21 +32,13 @@
 
 # git mergetool
 [merge]
-    tool = opendiff
     renameLimit = 0
 
 # use separate file for username / github token / etc
 [include]
     path = ~/.gitconfig.local
 
-[remote "origin"]
-    #fetch = +refs/heads/*:refs/remotes/origin/*
-
 [gpg]
     program = gpg
-[user]
-	team = devolop-3-5
-	name = shizhen
-	email = shizhen@xiaomi.com
 [pull]
-	rebase = false
+    rebase = false
