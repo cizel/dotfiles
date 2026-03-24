@@ -8,6 +8,7 @@ FZF_DIR="${HOME}/.fzf"
 FZF_VERSION="${FZF_VERSION:-0.70.0}"
 PLATFORM="${PLATFORM:-$(uname -s)}"
 ARCH="${ARCH:-$(uname -m)}"
+FORCE_INSTALL=0
 
 case "${PLATFORM}" in
   Linux)
@@ -36,6 +37,10 @@ need_cmd() {
   command -v "$1" >/dev/null 2>&1
 }
 
+log() {
+  printf '%s\n' "$*"
+}
+
 download_and_install_tarball() {
   local url="$1"
   local binary_path="$2"
@@ -58,6 +63,73 @@ require_supported_platform() {
 die() {
   printf 'error: %s\n' "$*" >&2
   exit 1
+}
+
+usage() {
+  cat <<'EOF'
+Usage: ./script/install-shell-tools.sh [--force]
+
+  --force  Reinstall tools even if matching binaries already exist
+EOF
+}
+
+parse_args() {
+  while (($#)); do
+    case "$1" in
+      --force)
+        FORCE_INSTALL=1
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      *)
+        die "unknown argument: $1"
+        ;;
+    esac
+    shift
+  done
+}
+
+have_tool() {
+  local cmd="$1"
+  shift
+
+  if (( FORCE_INSTALL )); then
+    return 1
+  fi
+
+  if command -v "${cmd}" >/dev/null 2>&1; then
+    return 0
+  fi
+
+  local path
+  for path in "$@"; do
+    [[ -x "${path}" ]] && return 0
+  done
+
+  return 1
+}
+
+install_if_missing() {
+  local label="$1"
+  local cmd="$2"
+  shift 2
+
+  local -a extra_paths=()
+  while (($#)) && [[ "$1" != "--" ]]; do
+    extra_paths+=("$1")
+    shift
+  done
+  [[ "${1:-}" == "--" ]] && shift
+
+  if have_tool "${cmd}" "${extra_paths[@]}"; then
+    log "skip ${label}: already installed"
+    return 0
+  fi
+
+  log "install ${label}"
+  "$@"
 }
 
 install_sheldon() {
@@ -116,21 +188,22 @@ install_eza() {
 }
 
 main() {
+  parse_args "$@"
   require_supported_platform
   need_cmd curl || { echo "curl is required"; exit 1; }
   need_cmd tar || { echo "tar is required"; exit 1; }
   need_cmd git || { echo "git is required"; exit 1; }
   need_cmd python3 || { echo "python3 is required"; exit 1; }
 
-  install_sheldon
-  install_starship
-  install_zoxide
-  install_atuin
-  install_direnv
-  install_fzf
-  install_fd
-  install_bat
-  install_eza
+  install_if_missing sheldon sheldon "${BIN_DIR}/sheldon" -- install_sheldon
+  install_if_missing starship starship "${BIN_DIR}/starship" -- install_starship
+  install_if_missing zoxide zoxide "${BIN_DIR}/zoxide" -- install_zoxide
+  install_if_missing atuin atuin "${ATUIN_BIN_DIR}/atuin" "${BIN_DIR}/atuin" -- install_atuin
+  install_if_missing direnv direnv "${BIN_DIR}/direnv" -- install_direnv
+  install_if_missing fzf fzf "${FZF_DIR}/bin/fzf" "${BIN_DIR}/fzf" -- install_fzf
+  install_if_missing fd fd "${BIN_DIR}/fd" -- install_fd
+  install_if_missing bat bat "${BIN_DIR}/bat" -- install_bat
+  install_if_missing eza eza "${BIN_DIR}/eza" -- install_eza
 
   cat <<EOF
 
