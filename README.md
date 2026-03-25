@@ -5,7 +5,7 @@ This repo now uses a modular Ubuntu-friendly shell setup:
 - `zsh`
 - `sheldon` for plugin management
 - `starship` for the prompt
-- `fzf`, `fd`, `bat`, `eza`, `zoxide` for CLI ergonomics
+- `fzf`, `fd`, `bat`, `eza`, `ripgrep`, `tig`, `zoxide` for CLI ergonomics
 - `direnv` for per-project environment loading
 - `atuin` for shell history
 - `tmux`, `vim`, `git`, `Doom Emacs`
@@ -26,7 +26,8 @@ before replacing them.
 
 The install script does not require Homebrew and does not write into system
 directories. It installs the CLI tools into `~/.local/bin`, `~/.atuin/bin`, and
-`~/.fzf/bin`.
+`~/.fzf/bin`. On Linux it now prefers `apt` packages first, and falls back to
+release downloads or git-based installs when a package is unavailable.
 
 If you only want symlinks and not the toolchain, run:
 
@@ -67,8 +68,10 @@ These are the new shell tools and why they exist:
 - `zoxide`: smarter directory jumping. It replaces the old `z` plugin flow.
 - `fzf`: fuzzy selection for history, files, and completions.
 - `fd`: simpler and faster file search than `find` for common interactive use.
+- `ripgrep`: fast recursive text search for code and logs.
 - `bat`: better file preview with syntax highlighting.
 - `eza`: modern `ls` replacement with cleaner output.
+- `tig`: interactive text UI for git history and staging.
 - `direnv`: auto-loads project-local environment variables from `.envrc`.
 - `atuin`: improved shell history and search.
 

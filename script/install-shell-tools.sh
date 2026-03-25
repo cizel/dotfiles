@@ -9,6 +9,7 @@ FZF_VERSION="${FZF_VERSION:-0.70.0}"
 PLATFORM="${PLATFORM:-$(uname -s)}"
 ARCH="${ARCH:-$(uname -m)}"
 FORCE_INSTALL=0
+APT_UPDATED=0
 
 case "${PLATFORM}" in
   Linux)
@@ -37,8 +38,20 @@ need_cmd() {
   command -v "$1" >/dev/null 2>&1
 }
 
+have_apt() {
+  command -v apt-get >/dev/null 2>&1 && command -v apt-cache >/dev/null 2>&1
+}
+
 log() {
   printf '%s\n' "$*"
+}
+
+ensure_link() {
+  local target="$1"
+  local source="$2"
+
+  mkdir -p "$(dirname "${target}")"
+  ln -sfn "${source}" "${target}"
 }
 
 download_and_install_tarball() {
@@ -91,17 +104,28 @@ parse_args() {
   done
 }
 
+sudo_cmd() {
+  if [[ "$(id -u)" -eq 0 ]]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
+
 have_tool() {
-  local cmd="$1"
+  local cmds_csv="$1"
   shift
 
   if (( FORCE_INSTALL )); then
     return 1
   fi
 
-  if command -v "${cmd}" >/dev/null 2>&1; then
-    return 0
-  fi
+  local cmd
+  for cmd in ${cmds_csv//,/ }; do
+    if command -v "${cmd}" >/dev/null 2>&1; then
+      return 0
+    fi
+  done
 
   local path
   for path in "$@"; do
@@ -113,7 +137,7 @@ have_tool() {
 
 install_if_missing() {
   local label="$1"
-  local cmd="$2"
+  local cmds_csv="$2"
   shift 2
 
   local -a extra_paths=()
@@ -123,12 +147,64 @@ install_if_missing() {
   done
   [[ "${1:-}" == "--" ]] && shift
 
-  if have_tool "${cmd}" "${extra_paths[@]}"; then
+  if have_tool "${cmds_csv}" "${extra_paths[@]}"; then
     log "skip ${label}: already installed"
     return 0
   fi
 
   log "install ${label}"
+  "$@"
+}
+
+apt_package_available() {
+  local package="$1"
+  apt-cache show "${package}" >/dev/null 2>&1
+}
+
+apt_install_package() {
+  local package="$1"
+
+  if ! have_apt; then
+    return 1
+  fi
+
+  if ! apt_package_available "${package}"; then
+    return 1
+  fi
+
+  if (( ! APT_UPDATED )); then
+    log "apt update"
+    sudo_cmd apt-get update
+    APT_UPDATED=1
+  fi
+
+  log "apt install ${package}"
+  sudo_cmd apt-get install -y "${package}"
+}
+
+install_with_apt_fallback() {
+  local label="$1"
+  local cmds_csv="$2"
+  local apt_package="$3"
+  shift 3
+
+  local -a extra_paths=()
+  while (($#)) && [[ "$1" != "--" ]]; do
+    extra_paths+=("$1")
+    shift
+  done
+  [[ "${1:-}" == "--" ]] && shift
+
+  if have_tool "${cmds_csv}" "${extra_paths[@]}"; then
+    log "skip ${label}: already installed"
+    return 0
+  fi
+
+  if apt_install_package "${apt_package}"; then
+    return 0
+  fi
+
+  log "fallback install ${label}"
   "$@"
 }
 
@@ -171,6 +247,12 @@ install_fd() {
     "fd"
 }
 
+post_install_fd() {
+  if command -v fdfind >/dev/null 2>&1 && ! command -v fd >/dev/null 2>&1; then
+    ensure_link "${BIN_DIR}/fd" "$(command -v fdfind)"
+  fi
+}
+
 install_bat() {
   local version="0.26.1"
   download_and_install_tarball \
@@ -179,12 +261,34 @@ install_bat() {
     "bat"
 }
 
+post_install_bat() {
+  if command -v batcat >/dev/null 2>&1 && ! command -v bat >/dev/null 2>&1; then
+    ensure_link "${BIN_DIR}/bat" "$(command -v batcat)"
+  fi
+}
+
 install_eza() {
   local version="0.23.4"
   download_and_install_tarball \
     "https://github.com/eza-community/eza/releases/download/v${version}/eza_${ARCH_ID}-${PLATFORM_ID}.tar.gz" \
     "eza" \
     "eza"
+}
+
+install_ripgrep() {
+  local version="14.1.1"
+  download_and_install_tarball \
+    "https://github.com/BurntSushi/ripgrep/releases/download/${version}/ripgrep-${version}-${ARCH_ID}-${PLATFORM_ID}.tar.gz" \
+    "ripgrep-${version}-${ARCH_ID}-${PLATFORM_ID}/rg" \
+    "rg"
+}
+
+install_tig() {
+  if apt_install_package tig; then
+    return 0
+  fi
+
+  die "tig is not available via apt on this system; install it manually"
 }
 
 main() {
@@ -196,14 +300,18 @@ main() {
   need_cmd python3 || { echo "python3 is required"; exit 1; }
 
   install_if_missing sheldon sheldon "${BIN_DIR}/sheldon" -- install_sheldon
-  install_if_missing starship starship "${BIN_DIR}/starship" -- install_starship
-  install_if_missing zoxide zoxide "${BIN_DIR}/zoxide" -- install_zoxide
-  install_if_missing atuin atuin "${ATUIN_BIN_DIR}/atuin" "${BIN_DIR}/atuin" -- install_atuin
-  install_if_missing direnv direnv "${BIN_DIR}/direnv" -- install_direnv
-  install_if_missing fzf fzf "${FZF_DIR}/bin/fzf" "${BIN_DIR}/fzf" -- install_fzf
-  install_if_missing fd fd "${BIN_DIR}/fd" -- install_fd
-  install_if_missing bat bat "${BIN_DIR}/bat" -- install_bat
-  install_if_missing eza eza "${BIN_DIR}/eza" -- install_eza
+  install_with_apt_fallback starship starship starship "${BIN_DIR}/starship" -- install_starship
+  install_with_apt_fallback zoxide zoxide zoxide "${BIN_DIR}/zoxide" -- install_zoxide
+  install_with_apt_fallback atuin atuin atuin "${ATUIN_BIN_DIR}/atuin" "${BIN_DIR}/atuin" -- install_atuin
+  install_with_apt_fallback direnv direnv direnv "${BIN_DIR}/direnv" -- install_direnv
+  install_with_apt_fallback fzf fzf fzf "${FZF_DIR}/bin/fzf" "${BIN_DIR}/fzf" -- install_fzf
+  install_with_apt_fallback fd "fd,fdfind" fd-find "${BIN_DIR}/fd" "${BIN_DIR}/fdfind" -- install_fd
+  post_install_fd
+  install_with_apt_fallback bat "bat,batcat" bat "${BIN_DIR}/bat" "${BIN_DIR}/batcat" -- install_bat
+  post_install_bat
+  install_with_apt_fallback eza "eza,exa" eza "${BIN_DIR}/eza" "${BIN_DIR}/exa" -- install_eza
+  install_with_apt_fallback ripgrep "rg,ripgrep" ripgrep "${BIN_DIR}/rg" -- install_ripgrep
+  install_if_missing tig tig "${BIN_DIR}/tig" -- install_tig
 
   cat <<EOF
 
